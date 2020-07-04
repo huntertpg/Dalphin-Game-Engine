@@ -2,7 +2,7 @@ package com.hunter.barnard.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.math.Vector2;
 import com.hunter.barnard.loaders.TextureLoader;
 
 public class Item2D {
@@ -10,12 +10,12 @@ public class Item2D {
 	private TextureLoader textureLoader;
 	private Texture texture;
 	private String name;
-	private float xPos = 0;
-	private float yPos = 0;
+	private Vector2 pos;
 	
 	public Item2D(String name, String path) {
 		textureLoader = new TextureLoader();
-			this.texture = textureLoader.loadTexture(path);	
+		this.texture = textureLoader.loadTexture(path);
+		pos = new Vector2();	
 	}
 	
 	public Texture getTexture() {
@@ -31,20 +31,26 @@ public class Item2D {
 		this.name = name;
 	}
 	public float getxPos() {
-		return xPos;
+		return pos.x;
 	}
 	public void setxPos(float xPos) {
-		this.xPos = xPos;
+		this.pos.x = xPos;
 	}
 	public float getyPos() {
-		return yPos;
+		return this.pos.y;
 	}
 	public void setyPos(float yPos) {
-		this.yPos = yPos;
+		this.pos.y = yPos;
+	}
+	public Vector2 getPos() {
+		return this.pos;
+	}
+	public void setPos(Vector2 pos) {
+		this.pos = pos;
 	}
 	
 	public void draw(Batch batch) {
-		batch.draw(this.getTexture(), this.xPos, this.yPos);
+		batch.draw(this.getTexture(), this.pos.x, this.pos.y);
 	}
 	
 }

@@ -11,9 +11,9 @@ package com.hunter.barnard.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.hunter.barnard.managers.TextureManager;
-import com.hunter.barnard.util.Animation2D;
 
 public class Player2D extends Actor	{
 	
@@ -38,9 +38,8 @@ public class Player2D extends Actor	{
 	//this is the players actual "username"
 	private String name;
 	
-	//declare sthe players x and y position
-	private float xPos = 0;
-	private float yPos = 0;
+	//declare sthe players x and y position as a Vector2
+	private Vector2 pos;
 	private float playerWidth;
 	private float playerHeight;
 	
@@ -61,6 +60,9 @@ public class Player2D extends Actor	{
 		
 		//sets the players username to the default username since one isn't provided
 		this.name = DEFAULTNAME;
+		
+		//initialize the players position as a vector2
+		this.pos = new Vector2();
 	}
 	
 	//creates the player using a constructor that takes in the texture manager and the players name
@@ -80,6 +82,9 @@ public class Player2D extends Actor	{
 		
 		//sets the players movespeed to the default movespeed since one wasn't provided
 		this.moveSpeed = DEFAULTMOVESPEED;
+		
+		//initialize the players position as a vector2
+		this.pos = new Vector2();
 	}
 	
 	//creates the player using a constructor that takes in a texture manager, a name and a player move speed
@@ -99,6 +104,9 @@ public class Player2D extends Actor	{
 		
 		//sets the players texture to the default texture since one wasn't provided
 		this.texture = DEFAULTTEXTURE;
+		
+		//initialize the players position as a vector2
+		this.pos = new Vector2();
 	}
 
 	//creates a player using a constructor that takes in a texture manager, name, movespedd, and player texture
@@ -115,6 +123,9 @@ public class Player2D extends Actor	{
 		//sets the players texture to the passed in texture
 		this.texture = texture;
 		
+		//initialize the players position as a vector2
+		this.pos = new Vector2();
+		
 	}
 	
 	//this will be used for updating the players position once the player input manager is made
@@ -125,12 +136,12 @@ public class Player2D extends Actor	{
 	
 	//gets the players current x position in float
 	public float getPlayerX() {
-		return this.xPos;
+		return this.pos.x;
 	}
 	
 	//gets the players current y position in float
 	public float getPlayerY() {
-		return this.yPos;
+		return this.pos.y;
 	}
 	
 	//gets the players current texture
@@ -145,12 +156,12 @@ public class Player2D extends Actor	{
 	
 	//sets the players current x position
 	public void setPlayerX(float xPos) {
-		this.xPos = xPos;
+		this.pos.x = xPos;
 	}
 	
 	//sets the players current y position
 	public void setPlayerY(float yPos) {
-		this.yPos = yPos;
+		this.pos.y = yPos;
 	}
 	
 	//sets the players current texture
@@ -180,10 +191,10 @@ public class Player2D extends Actor	{
 	}
 	
 	public void draw(Batch batch, float elapsedTime) {
-		batch.draw(this.texture, this.xPos, this.yPos);
+		batch.draw(this.texture, this.pos.x, this.pos.y);
 	}
 	
 	public void draw(Batch batch, float elapsedTime, float xPos, float yPos) {
-		batch.draw(this.texture, this.xPos, this.yPos);
+		batch.draw(this.texture, this.pos.x, this.pos.y);
 	}
 }

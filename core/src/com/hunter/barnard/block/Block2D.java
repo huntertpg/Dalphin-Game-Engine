@@ -3,6 +3,7 @@ package com.hunter.barnard.block;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.hunter.barnard.loaders.TextureLoader;
 
 public class Block2D {
@@ -10,8 +11,7 @@ public class Block2D {
 	private Texture texture;
 	private TextureRegion textureRegion;
 	private String name;
-	private float xPos;
-	private float yPos;
+	private Vector2 pos;
 	private int blockWidth = 32;
 	private int blockHeight = 32;
 	
@@ -20,16 +20,19 @@ public class Block2D {
 		textureLoader = new TextureLoader();
 		this.texture = textureLoader.loadTexture(path);
 		this.name = name;
+		pos = new Vector2();
 	}
 	
 	public Block2D(String name, Texture texture) {
 		this.texture = texture;
 		this.name = name;
+		pos = new Vector2();
 	}
 	
 	public Block2D(String name, TextureRegion texture) {
 		this.textureRegion = texture;
 		this.name = name;
+		pos = new Vector2();
 	}
 	
 	public Block2D(String name, String path, int blockWidth, int blockHeight) {
@@ -38,6 +41,7 @@ public class Block2D {
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		this.name = name;
+		pos = new Vector2();
 	}
 	
 	public Block2D(String name, Texture texture, int blockWidth, int blockHeight) {
@@ -45,6 +49,7 @@ public class Block2D {
 		this.texture = texture;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
+		pos = new Vector2();
 	}
 	
 	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight) {
@@ -52,6 +57,7 @@ public class Block2D {
 		this.name = name;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
+		pos = new Vector2();
 	}
 	
 	public Texture getTexture() {
@@ -71,19 +77,27 @@ public class Block2D {
 	}
 	
 	public float getxPos() {
-		return xPos;
+		return pos.x;
 	}
 	
 	public void setxPos(float xPos) {
-		this.xPos = xPos;
+		this.pos.x = xPos;
 	}
 	
 	public float getyPos() {
-		return yPos;
+		return pos.y;
+	}
+	
+	public Vector2 getPos() {
+		return this.pos;
 	}
 	
 	public void setyPos(float yPos) {
-		this.yPos = yPos;
+		this.pos.y = yPos;
+	}
+	
+	public void setPos(Vector2 pos) {
+		this.pos = pos;
 	}
 	
 	public TextureRegion getTextureRegion() {
@@ -113,18 +127,18 @@ public class Block2D {
 	
 	public void draw(Batch batch) {
 		if(texture == null) {
-			batch.draw(textureRegion, xPos, yPos);	
+			batch.draw(textureRegion, pos.x, pos.y);	
 		}else {
-			batch.draw(texture, xPos, yPos);
+			batch.draw(texture, pos.x, pos.y);
 		}
 		
 	}
 	
 	public void draw(Batch batch, float scale) {
 		if(texture == null) {
-			batch.draw(textureRegion, xPos, yPos, blockWidth * scale, blockHeight * scale);	
+			batch.draw(textureRegion, pos.x, pos.y, blockWidth * scale, blockHeight * scale);	
 		}else {
-			batch.draw(texture, xPos, yPos);
+			batch.draw(texture, pos.x, pos.y);
 		}
 		
 	}

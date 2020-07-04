@@ -25,8 +25,6 @@ public class KeyboardInputHandler extends InputAdapter {
 	public boolean keyDown (int keycode) {
 	//if W is Up set up to true
 	if (keycode == Keys.W) {
-		System.out.print("Up");
-
 		up = true;
 	//If S is down set down to true 
 	}else if (keycode == Keys.S) {

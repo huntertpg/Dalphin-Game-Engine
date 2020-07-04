@@ -17,10 +17,13 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.hunter.barnard.debug.DebugUtil;
 import com.hunter.barnard.loaders.TextureLoader;
 import com.hunter.barnard.util.SpriteSheetLoader;
 
 public class TextureManager {
+	
+	private DebugUtil debugUtil;
 	
 	//declare texture loader for actually loading the textures
 	private TextureLoader textureLoader;
@@ -44,13 +47,15 @@ public class TextureManager {
 	SpriteSheetLoader spriteLoader;
 	
 	//Constructor for the TextureManager taking in nothing
-	public TextureManager() {
+	public TextureManager(DebugUtil debugUtil) {
+		
+		this.debugUtil = debugUtil;
 		
 		//Init the Texture ArrayList
 		textureList = new ArrayList<Texture>();
 		
 		//Init the Texture Loader
-		textureLoader = new TextureLoader();
+		textureLoader = new TextureLoader(debugUtil);
 		
 		spriteLoader  = new SpriteSheetLoader(textureLoader);
 	}
@@ -89,7 +94,6 @@ public class TextureManager {
 	//This disposes of all the textures in the Texture arraylist
 	public void disposeAllTextures() {
 		for(int i = 0; i < textureList.size(); i++) {
-			System.out.print(i);
 			textureList.get(i).dispose();
 		}
 	}

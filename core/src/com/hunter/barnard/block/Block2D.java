@@ -17,7 +17,6 @@ public class Block2D {
 	
 
 	public Block2D(String name, String path) {
-		textureLoader = new TextureLoader();
 		this.texture = textureLoader.loadTexture(path);
 		this.name = name;
 		pos = new Vector2();
@@ -36,7 +35,6 @@ public class Block2D {
 	}
 	
 	public Block2D(String name, String path, int blockWidth, int blockHeight) {
-		textureLoader = new TextureLoader();
 		this.texture = textureLoader.loadTexture(path);
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;

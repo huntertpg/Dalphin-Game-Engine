@@ -12,7 +12,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hunter.barnard.debug.DebugUtil;
 import com.hunter.barnard.managers.AnimationManager;
+import com.hunter.barnard.managers.AssetManager;
 import com.hunter.barnard.managers.BlockManager;
 import com.hunter.barnard.managers.ItemManager;
 import com.hunter.barnard.managers.TextureManager;
@@ -26,10 +28,6 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	
 	//Create a sprite batch for rendering - this method will be moved to the renderers later on
 	SpriteBatch batch;
-	
-	//Declares the texture manager for loading and creating textures - this will be put in the 
-	//asset manager class later on
-	TextureManager textureManager;
 	
 	//This is the main renderer for 2D rendering. It contains the orthagraphic camera and will be 
 	//in charge of rendering for now.
@@ -46,10 +44,11 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	//this is the player movement class that takes in the input manager and modifies the players data based on that
 	Player2DMovement playerMovement;
 	
-	ItemManager itemManager;
-	BlockManager blockManager;
-	
 	AnimationManager animationManager;
+	
+	AssetManager assetManager;
+	
+	DebugUtil debugUtil;
 	
 	int pos = 0;
 	
@@ -62,45 +61,39 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		
 		//init the SpriteBatch that is used for rendering things to the screen
 		batch = new SpriteBatch();
-		
-		//init the texture manager that holds all the textures
-		textureManager = new TextureManager();
-		
-		//load all the textures into memory
-		textureManager.loadAllTextures();
+		debugUtil = new DebugUtil();
+		debugUtil.enableDebugging(true);
+		debugUtil.Debug();
+		assetManager = new AssetManager(debugUtil);
+		assetManager.InitManagers();
 		
 		//init the renderer that creates the camera and will eventually be used for all basic
 		//2D rendering
-		renderer = new Basic2DRenderer(batch, textureManager, 1280, 720);
+		renderer = new Basic2DRenderer(batch, assetManager.textureManager(), 1280, 720);
 		
 		//init the input handler for keyboard input
 		input = new KeyboardInputHandler();
 		
 		//init a player object (currenly just used for testing)
-		player = new TestPlayer(textureManager, "Test", 100, textureManager.playerSheet);
-		player.setPlayerTexture(textureManager.playerSheet);
+		player = new TestPlayer(assetManager.textureManager(), "Test", 100, assetManager.textureManager().playerSheet);
+		player.setPlayerTexture(assetManager.textureManager().playerSheet);
 		
 		//set the default input processor to the keyboard input manager - this needs to be done or else
 		//input from the input manager will not work
 		Gdx.input.setInputProcessor(input);
 		
-		animationManager = new AnimationManager(textureManager);
+		animationManager = new AnimationManager(assetManager.textureManager());
 		
 		playerMovement = new Player2DMovement(input, player, batch, animationManager);
 		
-		itemManager = new ItemManager();
-		 
-		blockManager = new BlockManager(textureManager);
-		
-		blockManager.brickTop.setyPos(32);
-		blockManager.brickFloor.setyPos(-32);
+		assetManager.blockManager().brickTop.setyPos(32);
+		assetManager.blockManager().brickFloor.setyPos(-32);
 		
 	}
 	
 	//this method isn't require but is called every render cycle to check for user input and to see if anything
 	//data wise has changed and if so it is modified
 	public void update() {
-		System.out.println(player.getPlayerY());
 	}
 
 	//this method is required - it renders things to the screen however the main bulk of this will be done in the
@@ -124,9 +117,9 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		//this draws the player to the screen by obtaining the players texture from the player object, getting the players current
 		//at the current players x and y position
 		//this ends the drawing of things to the screen
-		blockManager.brick.draw(batch, 2);
-		blockManager.brickTop.draw(batch, 2);
-		blockManager.brickFloor.draw(batch, 2);
+		assetManager.blockManager().brick.draw(batch, 2);
+		assetManager.blockManager().brickTop.draw(batch, 2);
+		assetManager.blockManager().brickFloor.draw(batch, 2);
 		playerMovement.update(Gdx.graphics.getDeltaTime());
 
 		batch.end();
@@ -142,6 +135,6 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		//This tells the sprite batch to dispose everything(such as the camera and such)
 		batch.dispose();
 		//this tells the texture manager to dispose all of its textures from memory
-		textureManager.disposeAllTextures();
+		assetManager.dispose();
 	}
 }

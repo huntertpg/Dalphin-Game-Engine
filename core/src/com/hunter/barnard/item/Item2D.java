@@ -3,6 +3,7 @@ package com.hunter.barnard.item;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.hunter.barnard.debug.DebugUtil;
 import com.hunter.barnard.loaders.TextureLoader;
 
 public class Item2D {
@@ -11,10 +12,10 @@ public class Item2D {
 	private Texture texture;
 	private String name;
 	private Vector2 pos;
-	
-	public Item2D(String name, String path) {
-		textureLoader = new TextureLoader();
-		this.texture = textureLoader.loadTexture(path);
+	private DebugUtil debugUtil;
+	public Item2D(String name, Texture texture) {
+		
+		this.texture = texture;
 		pos = new Vector2();	
 	}
 	

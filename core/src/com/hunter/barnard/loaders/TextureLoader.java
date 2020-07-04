@@ -8,16 +8,34 @@ package com.hunter.barnard.loaders;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.hunter.barnard.debug.DebugUtil;
 
 public class TextureLoader {
 	
+	private DebugUtil debug;
+	
+	public TextureLoader(DebugUtil debug) {
+		this.debug = debug;
+	}
+	
 	public Texture loadTexture(String path) {
 		try {
-			return new Texture(path);	
+			if(debug.isEnabled()) {
+				Texture texture = new Texture(path);
+				debug.printAssetLoading(texture);
+				return texture;
+			}else {
+				return new Texture(path);
+			}
+			
 		}catch(GdxRuntimeException e) {
-			return new Texture("MissingTexture.png");
+			if(debug.isEnabled()) {
+				Texture texture = new Texture("MissingTexture.png");
+				debug.printAssetLoading(texture);
+				return texture;
+			}else {
+				return new Texture("MissingTexture.png");
+			}
 		}
-		
 	}
-
 }

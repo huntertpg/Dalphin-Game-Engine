@@ -71,6 +71,15 @@ public class Block2D {
 		}
 	}
 	
+	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight) {
+		debugUtil = new DebugUtil();
+		this.textureRegion = texture;
+		this.name = name;
+		this.blockWidth = blockWidth;
+		this.blockHeight = blockHeight;
+		pos = new Vector2();
+	}
+	
 	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
 		this.textureRegion = texture;
@@ -82,6 +91,8 @@ public class Block2D {
 			debug.printAssetLoading(this);
 		}
 	}
+	
+	
 	
 	public Texture getTexture() {
 		return texture;

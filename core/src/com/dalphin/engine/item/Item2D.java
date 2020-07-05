@@ -2,6 +2,7 @@ package com.dalphin.engine.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.loaders.TextureLoader;
@@ -10,10 +11,20 @@ public class Item2D {
 	
 	private TextureLoader textureLoader;
 	private Texture texture;
+	private TextureRegion textureRegion;
 	private String name;
 	private Vector2 pos;
 	public Item2D(String name, Texture texture, DebugUtil debug) {
 		this.texture = texture;
+		this.name = name;
+		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
+	}
+	
+	public Item2D(String name, TextureRegion texture, DebugUtil debug) {
+		this.textureRegion = texture;
 		this.name = name;
 		pos = new Vector2();
 		if(debug.isEnabled()) {
@@ -53,7 +64,12 @@ public class Item2D {
 	}
 	
 	public void draw(Batch batch) {
-		batch.draw(this.getTexture(), this.pos.x, this.pos.y);
+		if(texture == null) {
+			batch.draw(this.textureRegion, this.pos.x, this.pos.y);
+		}else {
+			batch.draw(this.getTexture(), this.pos.x, this.pos.y);
+		}
+		
 	}
 	
 }

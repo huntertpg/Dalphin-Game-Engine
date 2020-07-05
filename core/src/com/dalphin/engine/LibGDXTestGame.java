@@ -12,6 +12,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.managers.AnimationManager;
 import com.dalphin.engine.managers.AssetManager;
@@ -23,6 +24,7 @@ import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.player.TestPlayer;
 import com.dalphin.engine.render.Basic2DRenderer;
 import com.dalphin.engine.util.KeyboardInputHandler;
+import com.dalphin.engine.world.WorldGen;
 
 public class LibGDXTestGame extends ApplicationAdapter {
 	
@@ -50,6 +52,8 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	
 	DebugUtil debugUtil;
 	
+	WorldGen world;
+	
 	int pos = 0;
 	
 	float elapsedTime;
@@ -61,12 +65,14 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		
 		//init the SpriteBatch that is used for rendering things to the screen
 		batch = new SpriteBatch();
+		
 		debugUtil = new DebugUtil();
 		debugUtil.enableDebugging(true);
 		debugUtil.Debug();
 		assetManager = new AssetManager(debugUtil);
 		assetManager.InitManagers();
-		
+		world = new WorldGen(assetManager.blockManager(), debugUtil);
+		world.genorateWorld();
 		//init the renderer that creates the camera and will eventually be used for all basic
 		//2D rendering
 		renderer = new Basic2DRenderer(batch, assetManager.textureManager(), 1280, 720);
@@ -87,13 +93,14 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		playerMovement = new Player2DMovement(input, player, batch, animationManager);
 		
 		assetManager.blockManager().brickTop.setyPos(32);
-		assetManager.blockManager().brickFloor.setyPos(-32);
+		assetManager.blockManager().brickFloor.setyPos(-32);		
 		
 	}
 	
 	//this method isn't require but is called every render cycle to check for user input and to see if anything
 	//data wise has changed and if so it is modified
 	public void update() {
+		
 	}
 
 	//this method is required - it renders things to the screen however the main bulk of this will be done in the
@@ -114,14 +121,13 @@ public class LibGDXTestGame extends ApplicationAdapter {
 
 		//This tells the sprite batch to begin another batch to render - all rendering is done between this and .end();
 		batch.begin();
+		world.drawWorld(batch);
+
 		//this draws the player to the screen by obtaining the players texture from the player object, getting the players current
 		//at the current players x and y position
 		//this ends the drawing of things to the screen
-		assetManager.blockManager().brick.draw(batch, 2);
-		assetManager.blockManager().brickTop.draw(batch, 2);
-		assetManager.blockManager().brickFloor.draw(batch, 2);
 		playerMovement.update(Gdx.graphics.getDeltaTime());
-
+		System.out.println(world.worldBlocks.get(0).getPos());
 		batch.end();
 
 		//this method checks for any updates that may occur (such as player input and modifcation to the player position)

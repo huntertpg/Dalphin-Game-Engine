@@ -11,7 +11,7 @@ public class ItemManager {
 	
 	public ItemManager(TextureManager textureManager, DebugUtil debug) {
 		this.debug = debug;
-		axe = new ItemAxe("Axe", textureManager.star, debug);
+		axe = new ItemAxe("Axe", textureManager.dungeonSpriteSheet[5][21], debug);
 	}
 
 }

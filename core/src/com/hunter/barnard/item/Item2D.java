@@ -12,11 +12,13 @@ public class Item2D {
 	private Texture texture;
 	private String name;
 	private Vector2 pos;
-	private DebugUtil debugUtil;
-	public Item2D(String name, Texture texture) {
-		
+	public Item2D(String name, Texture texture, DebugUtil debug) {
 		this.texture = texture;
-		pos = new Vector2();	
+		this.name = name;
+		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
 	public Texture getTexture() {

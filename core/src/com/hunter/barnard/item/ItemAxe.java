@@ -5,8 +5,8 @@ import com.hunter.barnard.debug.DebugUtil;
 
 public class ItemAxe extends Item2D{
 
-	public ItemAxe(String name, Texture texture) {
-		super(name, texture);
+	public ItemAxe(String name, Texture texture, DebugUtil debugUtil) {
+		super(name, texture, debugUtil);
 	}
 
 }

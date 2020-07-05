@@ -2,6 +2,7 @@ package com.hunter.barnard.debug.framework;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
+import com.hunter.barnard.block.Block2D;
 import com.hunter.barnard.item.Item2D;
 
 public class ConsoleUtil {
@@ -46,7 +47,9 @@ public class ConsoleUtil {
 		if(objectType instanceof Texture) {
 			System.out.println("[Asset Loading] Loading Texture " + ((FileTextureData)((Texture)objectType).getTextureData()).getFileHandle().path());
 		}else if(objectType instanceof Item2D) {
-			System.out.println("[Asset Loading] Loading Item" + ((Item2D) objectType).getName());
+			System.out.println("[Asset Loading] Loading Item " + ((Item2D) objectType).getName());
+		}else if(objectType instanceof Block2D) {
+			System.out.println("[Asset Loading] Loading Block " + ((Block2D) objectType).getName());
 		}
 	}
 	

@@ -24,7 +24,7 @@ public class AssetManager {
 		textureManager = new TextureManager(debug);
 		textureManager.loadAllTextures();
 		itemManager = new ItemManager(textureManager, debug);
-		blockManager = new BlockManager(textureManager);
+		blockManager = new BlockManager(textureManager, debug);
 	}
 	
 	public void dispose() {

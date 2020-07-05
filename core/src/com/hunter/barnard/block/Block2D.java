@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.hunter.barnard.debug.DebugUtil;
 import com.hunter.barnard.loaders.TextureLoader;
 
 public class Block2D {
@@ -14,48 +15,72 @@ public class Block2D {
 	private Vector2 pos;
 	private int blockWidth = 32;
 	private int blockHeight = 32;
-	
+	private DebugUtil debugUtil;
 
-	public Block2D(String name, String path) {
+	public Block2D(String name, String path, DebugUtil debug) {
+		debugUtil = new DebugUtil();
 		this.texture = textureLoader.loadTexture(path);
 		this.name = name;
 		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
-	public Block2D(String name, Texture texture) {
+	public Block2D(String name, Texture texture, DebugUtil debug) {
+		debugUtil = new DebugUtil();
 		this.texture = texture;
 		this.name = name;
 		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
-	public Block2D(String name, TextureRegion texture) {
+	public Block2D(String name, TextureRegion texture, DebugUtil debug) {
+		debugUtil = new DebugUtil();
 		this.textureRegion = texture;
 		this.name = name;
 		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
-	public Block2D(String name, String path, int blockWidth, int blockHeight) {
+	public Block2D(String name, String path, int blockWidth, int blockHeight, DebugUtil debug) {
+		debugUtil = new DebugUtil();
 		this.texture = textureLoader.loadTexture(path);
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		this.name = name;
 		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
-	public Block2D(String name, Texture texture, int blockWidth, int blockHeight) {
+	public Block2D(String name, Texture texture, int blockWidth, int blockHeight, DebugUtil debug) {
+		debugUtil = new DebugUtil();
 		this.name = name;
 		this.texture = texture;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
-	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight) {
+	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debug) {
+		debugUtil = new DebugUtil();
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		pos = new Vector2();
+		if(debug.isEnabled()) {
+			debug.printAssetLoading(this);
+		}
 	}
 	
 	public Texture getTexture() {

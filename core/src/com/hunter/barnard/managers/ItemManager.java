@@ -10,7 +10,8 @@ public class ItemManager {
 	private DebugUtil debug;
 	
 	public ItemManager(TextureManager textureManager, DebugUtil debug) {
-		axe = new ItemAxe("Axe", textureManager.star);
+		this.debug = debug;
+		axe = new ItemAxe("Axe", textureManager.star, debug);
 	}
 
 }

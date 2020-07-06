@@ -99,6 +99,9 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		
 	}
 	
+	//this method isn't require but is called every render cycle to check for user input and to see if anything
+	//data wise has changed and if so it is modified
+
 	/**
 	 * This is required as it disposes of all things that were loaded into memory such as textures and sounds
 	 */

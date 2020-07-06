@@ -15,6 +15,7 @@ public class BlockManager {
 	public Block2D blockWallLeft;
 	public Block2D blockWallEndLeft;
 	public Block2D blockWallEndRight;
+	public Block2D blockWallCornerTopLeft;
 	public ArrayList<Block2D> blocks = new ArrayList<Block2D>();
 	
 	public BlockManager(TextureManager textureManager, DebugUtil debug) {
@@ -25,6 +26,7 @@ public class BlockManager {
 		blocks.add(blockWallLeft = new BlockBrick("Brick Wall Left", textureManager.dungeonSpriteSheet[8][0], 16, 16, debug));
 		blocks.add(blockWallEndLeft = new BlockBrick("Brick Wall End Left", textureManager.dungeonSpriteSheet[9][0], 16, 16, debug));
 		blocks.add(blockWallEndRight = new BlockBrick("Brick Wall End Right", textureManager.dungeonSpriteSheet[9][1], 16, 16, debug));
+		blocks.add(blockWallCornerTopLeft = new BlockBrick("Brick Wall Corner Top Left", textureManager.dungeonSpriteSheet[7][2], 16, 16, debug));
 	}
 	
 	public Block2D getBlock(int index) {

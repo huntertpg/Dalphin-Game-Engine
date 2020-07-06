@@ -27,16 +27,18 @@ public class Player2DMovement {
   
 		if(keyboardInputHandler.isUp()) {
 			player.setPlayerY(player.getPlayerY() + player.getPlayerMoveSpeed() * deltaTime);
+			animationManager.walkLeftAnimation.draw(batch, elapsedTime, player.getPlayerWidth(), player.getPlayerHeight(), player.getPlayerX(), player.getPlayerY());
 		} else if(keyboardInputHandler.isDown()) {
 			player.setPlayerY(player.getPlayerY() - player.getPlayerMoveSpeed() * deltaTime);
+			animationManager.walkLeftAnimation.draw(batch, elapsedTime, player.getPlayerWidth(), player.getPlayerHeight(), player.getPlayerX(), player.getPlayerY());
 		} else if(keyboardInputHandler.isLeft()) {
 			player.setPlayerX(player.getPlayerX() - player.getPlayerMoveSpeed() * deltaTime);
-			animationManager.walkLeftAnimation.draw(batch, elapsedTime, player.getPlayerWidth() * 2, player.getPlayerHeight() * 2, player.getPlayerX(), player.getPlayerY());
+			animationManager.walkLeftAnimation.draw(batch, elapsedTime, player.getPlayerWidth(), player.getPlayerHeight() , player.getPlayerX(), player.getPlayerY());
 		} else if(keyboardInputHandler.isRight()) {
 			player.setPlayerX(player.getPlayerX() + player.getPlayerMoveSpeed() * deltaTime);
-			animationManager.walkRightAnimation.draw(batch, elapsedTime, player.getPlayerWidth() * 2, player.getPlayerHeight() * 2, player.getPlayerX(), player.getPlayerY());
+			animationManager.walkRightAnimation.draw(batch, elapsedTime, player.getPlayerWidth(), player.getPlayerHeight(), player.getPlayerX(), player.getPlayerY());
 		}else {
-			animationManager.idleAnimation.draw(batch, elapsedTime, player.getPlayerWidth() * 2, player.getPlayerWidth() * 2, player.getPlayerX(), player.getPlayerY());
+			animationManager.idleAnimation.draw(batch, elapsedTime, player.getPlayerWidth(), player.getPlayerWidth(), player.getPlayerX(), player.getPlayerY());
 
 		}
 	}

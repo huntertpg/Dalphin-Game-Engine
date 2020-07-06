@@ -7,11 +7,12 @@ public class AnimationManager {
 	public Animation2D idleAnimation;
 	public Animation2D walkRightAnimation;
 	public Animation2D walkLeftAnimation;
-	
 	public AnimationManager(TextureManager textureManager) {
-		idleAnimation = new Animation2D(textureManager.playerSheet, 1, 1, 13, 32, 32, false, false);
-		walkRightAnimation = new Animation2D(textureManager.playerSheet, 2, 1, 8, 32, 32, false, false);
-		walkLeftAnimation = new Animation2D(textureManager.playerSheet, 2, 1, 8, 32, 32, true, false);
+		idleAnimation = new Animation2D(textureManager.dungeonSpriteSheet[1][1].getTexture(), 3, 8, 1, 12, 16, 16, false, false, 0, 2);
+		//idleAnimation = new Animation2D(textureManager.playerSheet, 1, 0, 1, 13, 32, 32, false, false);
+		walkRightAnimation = new Animation2D(textureManager.dungeonSpriteSheet[1][1].getTexture(), 3, 13, 1, 16, 16, 16, false, false, 0, 4);
+		walkLeftAnimation = new Animation2D(textureManager.dungeonSpriteSheet[1][1].getTexture(), 3, 13, 1, 16, 16, 16, true, false, 0, 4);
+		
 	}
 
 }

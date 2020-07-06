@@ -83,7 +83,6 @@ public class TextureManager {
 		dungeonSpriteSheet = spriteLoader.loadSpriteSheet("DunTile.png", 8, 13, 16, 16);
 		
 		
-		
 	}
 	
 	//This method will get a texture - currently not work as I want the ID system to work first

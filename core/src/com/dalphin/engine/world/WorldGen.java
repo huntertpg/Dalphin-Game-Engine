@@ -11,7 +11,8 @@ import com.dalphin.engine.managers.BlockManager;
 public class WorldGen {
 	
 	private DebugUtil debug;
-	private int[] world;
+	private int[] worldLayerOne;
+	private int[] worldLayerTwo;
 	private BlockManager blockManager;
 	public ArrayList<Block2D> worldBlocks = new ArrayList<Block2D>();
 	
@@ -19,21 +20,50 @@ public class WorldGen {
 	public WorldGen(BlockManager blockManager, DebugUtil debug) {
 		this.debug = debug;
 		this.blockManager = blockManager;
-		world = new int[] {5,6,2,2,100,
-						   4,3,1,1,100,
-						   4,3,0,0,100};
+		worldLayerOne = new int[] 
+				          {90,90,90,90,90,90,90,90,90,90,90,90,100,
+				           90,1,2,2,2,2,2,2,2,2,2,2,100,
+				           90,2,2,2,2,2,2,2,2,2,2,2,100,
+				           90,2,2,2,2,2,2,2,2,2,2,2,100,
+						   90,2,2,2,2,2,2,2,2,2,2,2,100,
+						   90,2,2,2,2,2,2,2,2,2,2,2,100};
+		worldLayerTwo = new int[] 
+				  {90,0,0,0,0,0,0,0,0,0,0,0,100,
+		           4,3,1,1,1,1,1,1,1,1,1,1,100,
+		           4,3,90,90,90,90,90,90,90,90,90,90,100,
+		           4,3,90,90,90,90,90,90,90,90,90,90,100,
+				   4,3,90,90,90,90,90,90,90,90,90,90,100,
+				   5,6,90,90,90,90,90,90,90,90,90,90,100};
 	}
 	
 	public void genorateWorld() {
 		Block2D block;
 		float xPos = 0;
 		float yPos = 0;
-		for(int i = 0; i < world.length; i++) {
-			if(world[i] == 100) {
-				yPos += 32;
+		for(int i = 0; i < worldLayerOne.length; i++) {
+			if(worldLayerOne[i] == 100) {
+				yPos -= 32;
 				xPos = 0;
+			}else if(worldLayerOne[i] == 90) {
+				xPos +=32;
 			}else {
-				block = new Block2D(blockManager.getBlock(world[i]).getName(), blockManager.getBlock(world[i]).getTextureRegion(), blockManager.getBlock(world[i]).getBlockWidth(), blockManager.getBlock(world[i]).getBlockHeight());
+				block = new Block2D(blockManager.getBlock(worldLayerOne[i]).getName(), blockManager.getBlock(worldLayerOne[i]).getTextureRegion(), blockManager.getBlock(worldLayerOne[i]).getBlockWidth(), blockManager.getBlock(worldLayerOne[i]).getBlockHeight());
+				block.setPos(new Vector2(xPos, yPos));
+				worldBlocks.add(block);
+				xPos +=32;
+			}
+			
+		}
+		xPos = 0;
+		yPos = 0;
+		for(int i = 0; i < worldLayerTwo.length; i++) {
+			if(worldLayerTwo[i] == 100) {
+				yPos -= 32;
+				xPos = 0;
+			}else if(worldLayerTwo[i] == 90) {
+				xPos += 32;
+			}else {
+				block = new Block2D(blockManager.getBlock(worldLayerTwo[i]).getName(), blockManager.getBlock(worldLayerTwo[i]).getTextureRegion(), blockManager.getBlock(worldLayerTwo[i]).getBlockWidth(), blockManager.getBlock(worldLayerTwo[i]).getBlockHeight());
 				block.setPos(new Vector2(xPos, yPos));
 				worldBlocks.add(block);
 				xPos +=32;

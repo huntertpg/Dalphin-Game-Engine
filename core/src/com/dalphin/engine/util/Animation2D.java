@@ -40,6 +40,59 @@ public class Animation2D {
 		
 		animation = new Animation(1f/10f, animationFrames);
 	}
+	
+	public Animation2D(Texture spriteSheet, int startRow, int startColumn, int rows, int columns, 
+			int spriteWidth, int spriteHeight, boolean flipX, boolean flipY) {
+		this.spriteSheet = spriteSheet;
+		this.spriteHeight = spriteHeight;
+		this.spriteWidth = spriteWidth;
+		this.rows = rows;
+		this.columns = columns;
+		this.xPos = 0;
+		this.yPos = 0;
+		
+		TextureRegion[][] tempFrames = TextureRegion.split(spriteSheet, spriteWidth, spriteHeight);
+		
+		animationFrames = new TextureRegion[rows * columns - startColumn];
+		
+		int index = 0;
+		
+			for(int j = startColumn; j < columns; j++) {
+				tempFrames[startRow][j].flip(flipX, flipY);
+				System.out.println(animationFrames.length);
+				animationFrames[index++] = tempFrames[startRow][j];
+			}
+		
+		animation = new Animation(1f/10f, animationFrames);
+	}
+	
+	public Animation2D(Texture spriteSheet, int startRow, int startColumn, int rows, int columns, 
+			int spriteWidth, int spriteHeight, boolean flipX, boolean flipY, int expansionX, int expansionY) {
+		this.spriteSheet = spriteSheet;
+		this.spriteHeight = spriteHeight;
+		this.spriteWidth = spriteWidth;
+		this.rows = rows;
+		this.columns = columns;
+		this.xPos = 0;
+		this.yPos = 0;
+		
+		TextureRegion[][] tempFrames = TextureRegion.split(spriteSheet, spriteWidth, spriteHeight);
+		
+		animationFrames = new TextureRegion[rows * columns - startColumn];
+		
+		int index = 0;
+		
+			for(int j = startColumn; j < columns; j++) {
+				tempFrames[startRow][j].setRegion(tempFrames[startRow][j].getRegionX()-expansionX, 
+						tempFrames[startRow][j].getRegionY()-expansionY, spriteWidth+expansionX, spriteHeight+expansionY);
+				tempFrames[startRow][j].flip(flipX, flipY);
+				System.out.println(animationFrames.length);
+				animationFrames[index++] = tempFrames[startRow][j];
+			}
+		
+		animation = new Animation(1f/10f, animationFrames);
+	}
+
 
 	public Animation2D(Texture spriteSheet, int rows, 
 		int columns, int spriteWidth, int spriteHeight, float xPos, float yPos) {

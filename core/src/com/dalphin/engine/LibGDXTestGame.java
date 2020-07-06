@@ -100,7 +100,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	//this method isn't require but is called every render cycle to check for user input and to see if anything
 	//data wise has changed and if so it is modified
 	public void update() {
-		
+
 	}
 
 	//this method is required - it renders things to the screen however the main bulk of this will be done in the

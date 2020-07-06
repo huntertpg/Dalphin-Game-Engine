@@ -1,1 +1,12 @@
+com.dalphin.engine
+com.dalphin.engine.block
+com.dalphin.engine.debug
+com.dalphin.engine.debug.framework
+com.dalphin.engine.desktop
+com.dalphin.engine.item
+com.dalphin.engine.loaders
+com.dalphin.engine.managers
+com.dalphin.engine.player
+com.dalphin.engine.render
 com.dalphin.engine.util
+com.dalphin.engine.world

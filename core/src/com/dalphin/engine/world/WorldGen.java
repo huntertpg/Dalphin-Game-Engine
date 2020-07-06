@@ -16,7 +16,11 @@ public class WorldGen {
 	private BlockManager blockManager;
 	public ArrayList<Block2D> worldBlocks = new ArrayList<Block2D>();
 	
-	
+	/**
+	 * 
+	 * @param blockManager
+	 * @param debug
+	 */
 	public WorldGen(BlockManager blockManager, DebugUtil debug) {
 		this.debug = debug;
 		this.blockManager = blockManager;
@@ -35,7 +39,9 @@ public class WorldGen {
 				   4,3,90,90,90,90,90,90,90,90,90,90,100,
 				   5,6,90,90,90,90,90,90,90,90,90,90,100};
 	}
-	
+	/**
+	 * 
+	 */
 	public void genorateWorld() {
 		Block2D block;
 		float xPos = 0;
@@ -71,7 +77,10 @@ public class WorldGen {
 			
 		}
 	}
-	
+	/**
+	 * 
+	 * @param batch
+	 */
 	public void drawWorld(Batch batch) {
 		for(int i = 0; i < worldBlocks.size(); i++) {
 			worldBlocks.get(i).draw(batch, 2);

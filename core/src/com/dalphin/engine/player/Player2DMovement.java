@@ -11,7 +11,13 @@ public class Player2DMovement {
 	private AnimationManager animationManager;
 	private Batch batch;
 	private float elapsedTime;
-	
+	/**
+	 * 
+	 * @param keyboardInputHandler
+	 * @param player
+	 * @param batch
+	 * @param animationManager
+	 */
 	public Player2DMovement(KeyboardInputHandler keyboardInputHandler, Player2D player, Batch batch, 
 			AnimationManager animationManager) {
 		
@@ -20,7 +26,10 @@ public class Player2DMovement {
 		this.animationManager = animationManager;
 		this.batch = batch;
 	}
-	
+	/**
+	 * 
+	 * @param deltaTime
+	 */
 	public void update(float deltaTime) {
 
 		elapsedTime += deltaTime;

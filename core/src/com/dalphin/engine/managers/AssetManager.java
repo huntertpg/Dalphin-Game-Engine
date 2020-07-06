@@ -15,30 +15,46 @@ public class AssetManager {
 	private ItemManager itemManager;
 	private BlockManager blockManager;
 	private DebugUtil debug;
-		
+	/**
+	 * 
+	 * @param debug
+	 */
 	public AssetManager(DebugUtil debug) {
 		this.debug = debug;
 	}
-
+	/**
+	 * 
+	 */
 	public void InitManagers() {
 		textureManager = new TextureManager(debug);
 		textureManager.loadAllTextures();
 		itemManager = new ItemManager(textureManager, debug);
 		blockManager = new BlockManager(textureManager, debug);
 	}
-	
+	/**
+	 * 
+	 */
 	public void dispose() {
 		textureManager.disposeAllTextures();
 	}
-	
+	/**
+	 * 
+	 * @return textureManager
+	 */
 	public TextureManager textureManager() {
 		return this.textureManager;
 	}
-	
+	/**
+	 * 
+	 * @return itemManager
+	 */
 	public ItemManager itemManager() {
 		return this.itemManager;
 	}
-	
+	/**
+	 * 
+	 * @return blockManager
+	 */
 	public BlockManager blockManager() {
 		return this.blockManager;
 	}

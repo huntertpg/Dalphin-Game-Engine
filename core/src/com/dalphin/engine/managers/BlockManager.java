@@ -18,6 +18,11 @@ public class BlockManager {
 	public Block2D blockWallCornerTopLeft;
 	public ArrayList<Block2D> blocks = new ArrayList<Block2D>();
 	
+	/**
+	 * 
+	 * @param textureManager
+	 * @param debug
+	 */
 	public BlockManager(TextureManager textureManager, DebugUtil debug) {
 		blocks.add(brickTop = new BlockBrick("Brick Top", textureManager.dungeonSpriteSheet[0][1], 16, 16, debug));
 		blocks.add(brick = new BlockBrick("Brick", textureManager.dungeonSpriteSheet[1][1], 16, 16, debug));
@@ -28,7 +33,11 @@ public class BlockManager {
 		blocks.add(blockWallEndRight = new BlockBrick("Brick Wall End Right", textureManager.dungeonSpriteSheet[9][1], 16, 16, debug));
 		blocks.add(blockWallCornerTopLeft = new BlockBrick("Brick Wall Corner Top Left", textureManager.dungeonSpriteSheet[7][2], 16, 16, debug));
 	}
-	
+	/**
+	 * 
+	 * @param index
+	 * @return block
+	 */
 	public Block2D getBlock(int index) {
 		return this.blocks.get(index);
 	}

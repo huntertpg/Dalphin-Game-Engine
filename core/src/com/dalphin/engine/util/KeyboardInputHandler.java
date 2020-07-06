@@ -19,8 +19,10 @@ public class KeyboardInputHandler extends InputAdapter {
 	private boolean down = false;
 	private boolean left = false;
 	private boolean right = false;
-	
-	//this method checks to see if a key is down
+	/**
+	 * this method checks to see if a key is down
+	 * @param keycode 
+	 */
 	@Override
 	public boolean keyDown (int keycode) {
 	//if W is Up set up to true
@@ -41,8 +43,11 @@ public class KeyboardInputHandler extends InputAdapter {
 	 
 	}
 	
-	//This method is for checking if keys are up. Mainly used for setting move valuse to false
-	//due to the key not being pressed anymore
+	/**
+	 * This method is for checking if keys are up. Mainly used for setting move valuse to false
+	 * due to the key not being pressed anymore
+	 * @param keycode 
+	 */
 	@Override
 	public boolean keyUp (int keycode) {
 	if (keycode == Keys.W) {
@@ -59,18 +64,31 @@ public class KeyboardInputHandler extends InputAdapter {
 	}
 	
 	//getters and setters for if keys are down
+	/**
+	 * 
+	 * @return up
+	 */
 	public boolean isUp() {
 		return up;
 	}
-	
+	/**
+	 * 
+	 * @return down
+	 */
 	public boolean isDown() {
 		return down;
 	}
-	
+	/**
+	 * 
+	 * @return left
+	 */
 	public boolean isLeft() {
 		return left;
 	}
-	
+	/**
+	 * 
+	 * @return right
+	 */
 	public boolean isRight() {
 		return right;
 	}

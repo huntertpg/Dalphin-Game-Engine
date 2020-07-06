@@ -1,4 +1,4 @@
-/* Author: Hunter Barnard
+/** @author: Hunter Barnard
  * 
  * This class is basically the game. It does the main methods such as create, render and dispose
  * There are other functions such as pause and unpause that will be added later.
@@ -28,12 +28,16 @@ import com.dalphin.engine.world.WorldGen;
 
 public class LibGDXTestGame extends ApplicationAdapter {
 	
+	AnimationManager animationManager;
+	
+	AssetManager assetManager;
+	
 	//Create a sprite batch for rendering - this method will be moved to the renderers later on
 	SpriteBatch batch;
 	
-	//This is the main renderer for 2D rendering. It contains the orthagraphic camera and will be 
-	//in charge of rendering for now.
-	Basic2DRenderer renderer;
+	DebugUtil debugUtil;
+	
+	float elapsedTime;
 	
 	//This is the input manager for handing user input in the form of a keyboard - there will be
 	//a controller and mouse input manager later on
@@ -46,20 +50,18 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	//this is the player movement class that takes in the input manager and modifies the players data based on that
 	Player2DMovement playerMovement;
 	
-	AnimationManager animationManager;
-	
-	AssetManager assetManager;
-	
-	DebugUtil debugUtil;
-	
-	WorldGen world;
-	
 	int pos = 0;
 	
-	float elapsedTime;
-	//This is the create method. This is basically where all the initialization is done to get
-	//assets loaded up, input managers set, and the initialization of objects such as renderers
-	//players, etc...
+	//This is the main renderer for 2D rendering. It contains the orthagraphic camera and will be 
+	//in charge of rendering for now.
+	Basic2DRenderer renderer;
+	
+	WorldGen world;
+	/**
+	 * This is the create method. This is basically where all the initialization is done to get
+	 * assets loaded up, input managers set, and the initialization of objects such as renderers
+	 * players, etc...
+	 */
 	@Override
 	public void create () {
 		
@@ -97,14 +99,22 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		
 	}
 	
-	//this method isn't require but is called every render cycle to check for user input and to see if anything
-	//data wise has changed and if so it is modified
-	public void update() {
+	/**
+	 * This is required as it disposes of all things that were loaded into memory such as textures and sounds
+	 */
+	@Override
+	public void dispose () {
 		
+		//This tells the sprite batch to dispose everything(such as the camera and such)
+		batch.dispose();
+		//this tells the texture manager to dispose all of its textures from memory
+		assetManager.dispose();
 	}
 
-	//this method is required - it renders things to the screen however the main bulk of this will be done in the
-	//renderer of choice (that being the basic 2d renderer, 3D renderer etc...)
+	/**
+	 * this method is required - it renders things to the screen however the main bulk of this will be done in the
+	 * renderer of choice (that being the basic 2d renderer, 3D renderer etc...)
+	 */
 	@Override
 	public void render () {
 		
@@ -134,13 +144,11 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		update();
 	}
 	
-	//This is required as it disposes of all things that were loaded into memory such as textures and sounds
-	@Override
-	public void dispose () {
+	/**
+	 * this method isn't require but is called every render cycle to check for user input and to see if anything
+	 * data wise has changed and if so it is modified
+	 */
+	public void update() {
 		
-		//This tells the sprite batch to dispose everything(such as the camera and such)
-		batch.dispose();
-		//this tells the texture manager to dispose all of its textures from memory
-		assetManager.dispose();
 	}
 }

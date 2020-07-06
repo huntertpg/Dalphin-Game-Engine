@@ -1,4 +1,4 @@
-/* Author: Hunter Barnard
+/** @author: Hunter Barnard
  * 
  * This is the Player Object class. This class if for declaring what makes up a player.
  * This handles texturing of the player, the player move speed, the player position, as well as getters
@@ -43,7 +43,13 @@ public class Player2D extends Actor	{
 	private float playerWidth;
 	private float playerHeight;
 	
-	//creates the player usinga constructor only taking in the texture manager for loading in the players texture
+	/**
+	 * This constructor creates a player by passing in a texture manager as it will
+	 * be needed to set the texture of the player (typing this I realize it should just be a
+	 * texture)
+	 * @param TextureManager
+	 * TODO Change argument from TextureManager to Texture
+	 */
 	public Player2D(TextureManager textureManager) {
 		
 		//sets the texture manager for this class to the passed in texture manager
@@ -65,7 +71,13 @@ public class Player2D extends Actor	{
 		this.pos = new Vector2();
 	}
 	
-	//creates the player using a constructor that takes in the texture manager and the players name
+	/**
+	 * Creates the player using a constructor that
+	 * takes in the TextureManager and the Player name
+	 * @param TextureManager
+	 * @param String name
+	 * TODO Change TextureManager param to Texture
+	 */
 	public Player2D(TextureManager textureManager, String name) {
 		
 		//sets the classes texture manager to the passed in texture manager
@@ -87,7 +99,13 @@ public class Player2D extends Actor	{
 		this.pos = new Vector2();
 	}
 	
-	//creates the player using a constructor that takes in a texture manager, a name and a player move speed
+	/**
+	 * Creates the player using a constructor that takes in a TextureManager, a Name and the Player Move Speed
+	 * @param TextureManager
+	 * @param String name
+	 * @param float moveSpeed
+	 * TODO Change TextureManager param to Texture
+	 */
 	public Player2D(TextureManager textureManager, String name, float moveSpeed) {
 		
 		//sets the class texture manager to the one that is passed in
@@ -109,7 +127,14 @@ public class Player2D extends Actor	{
 		this.pos = new Vector2();
 	}
 
-	//creates a player using a constructor that takes in a texture manager, name, movespedd, and player texture
+	/**
+	 * Creates a player using a constructor that takes in a TextureManager, Name, moveSpeed, and Player Texture
+	 * @param TextureManager
+	 * @param String name
+	 * @param float moveSpeed
+	 * @param Texture texture
+	 * TODO remove this constructor
+	 */
 	public Player2D(TextureManager textureManager, String name, float moveSpeed, Texture texture) {
 		//sets the classes texture manager to the passed in texture manager
 		this.textureManager = textureManager;
@@ -128,72 +153,124 @@ public class Player2D extends Actor	{
 		
 	}
 	
-	//this will be used for updating the players position once the player input manager is made
-	//will also be used to keep track of positional and texture data
+	/**
+	 * This will be used for updating the players position once the player input manager is made
+	 * will also be used to keep track of positional and texture data
+	 * TODO Do what the comment says as InputManager exists
+	 */
+	
 	public void update() {
 		
 	}
 	
-	//gets the players current x position in float
+	/**
+	 * Gets the players current x position in float
+	 * @return float pos.x
+	 */
 	public float getPlayerX() {
 		return this.pos.x;
 	}
 	
-	//gets the players current y position in float
+	/** 
+	 * Gets the players current y position in float
+	 * @return float pos.y
+	 */
 	public float getPlayerY() {
 		return this.pos.y;
 	}
 	
-	//gets the players current texture
+	/**
+	 * Gets the players current texture
+	 * @return Texture texture
+	 */
 	public Texture getPlayerTexture() {
 		return this.texture;
 	}
 	
-	//gets the players current move speed (not to be confused with current speed of velocity, just the set speed)
+	/**
+	 * Gets the players current move speed (not to be confused with current speed of velocity, just the set speed)
+	 * @return float moveSpeed
+	 */
 	public float getPlayerMoveSpeed() {
 		return this.moveSpeed;
 	}
 	
-	//sets the players current x position
+	/**
+	 * Sets the players current x position
+	 * @param float xPos
+	 */
 	public void setPlayerX(float xPos) {
 		this.pos.x = xPos;
 	}
 	
-	//sets the players current y position
+	/**
+	 * Sets the players current y position
+	 * @param float yPos
+	 */
 	public void setPlayerY(float yPos) {
 		this.pos.y = yPos;
 	}
 	
-	//sets the players current texture
+	/**
+	 * Sets the players current texture
+	 * @param Texture
+	 */
 	public void setPlayerTexture(Texture texture) {
 		this.texture = texture;
 	}
 	
+	/**
+	 * Sets the players height
+	 * @param float height
+	 */
 	public void setPlayerHeight(float height) {
 		this.playerHeight = height;
 	}
-	
+	/**
+	 * Sets the players width
+	 * @param float width 
+	 */
 	public void setPlayerWidth(float width) {
 		this.playerWidth = width;
 	}
-	
+	/**
+	 * Gets the players width
+	 * @return float playerWidth
+	 */
 	public float getPlayerWidth() {
 		return this.playerWidth;
 	}
-	
+	/**
+	 * Gets the players height
+	 * @return playerHeight
+	 */
 	public float getPlayerHeight() {
 		return this.playerHeight;
 	}
 	
-	//sets the players current move speed
+	/**
+	 * sets the players current move speed
+	 * @param speed
+	 */
 	public void setPlayerSpeed(float speed) {
 		this.moveSpeed = speed;
 	}
-	
+
+	/**
+	 * Draws the player using a batch and takes in the elapsed time
+	 * @param Batch
+	 * @param float elapsedTime
+	 */
 	public void draw(Batch batch, float elapsedTime) {
 		batch.draw(this.texture, this.pos.x, this.pos.y);
 	}
-	
+	/**
+	 * Draws the player using a batch, as well as where to draw it in the x and y positions
+	 * @param batch
+	 * @param elapsedTime
+	 * @param xPos
+	 * @param yPos
+	 */
 	public void draw(Batch batch, float elapsedTime, float xPos, float yPos) {
 		batch.draw(this.texture, this.pos.x, this.pos.y);
 	}

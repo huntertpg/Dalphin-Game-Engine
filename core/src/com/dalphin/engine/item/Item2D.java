@@ -9,11 +9,17 @@ import com.dalphin.engine.loaders.TextureLoader;
 
 public class Item2D {
 	
-	private TextureLoader textureLoader;
-	private Texture texture;
-	private TextureRegion textureRegion;
 	private String name;
 	private Vector2 pos;
+	private Texture texture;
+	private TextureLoader textureLoader;
+	private TextureRegion textureRegion;
+	/**
+	 * 
+	 * @param name
+	 * @param texture
+	 * @param debug
+	 */
 	public Item2D(String name, Texture texture, DebugUtil debug) {
 		this.texture = texture;
 		this.name = name;
@@ -22,7 +28,12 @@ public class Item2D {
 			debug.printAssetLoading(this);
 		}
 	}
-	
+	/**
+	 * 
+	 * @param name
+	 * @param texture
+	 * @param debug
+	 */
 	public Item2D(String name, TextureRegion texture, DebugUtil debug) {
 		this.textureRegion = texture;
 		this.name = name;
@@ -31,38 +42,10 @@ public class Item2D {
 			debug.printAssetLoading(this);
 		}
 	}
-	
-	public Texture getTexture() {
-		return texture;
-	}
-	public void setTexture(Texture texture) {
-		this.texture = texture;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public float getxPos() {
-		return pos.x;
-	}
-	public void setxPos(float xPos) {
-		this.pos.x = xPos;
-	}
-	public float getyPos() {
-		return this.pos.y;
-	}
-	public void setyPos(float yPos) {
-		this.pos.y = yPos;
-	}
-	public Vector2 getPos() {
-		return this.pos;
-	}
-	public void setPos(Vector2 pos) {
-		this.pos = pos;
-	}
-	
+	/**
+	 * 
+	 * @param batch
+	 */
 	public void draw(Batch batch) {
 		if(texture == null) {
 			batch.draw(this.textureRegion, this.pos.x, this.pos.y);
@@ -70,6 +53,76 @@ public class Item2D {
 			batch.draw(this.getTexture(), this.pos.x, this.pos.y);
 		}
 		
+	}
+	/**
+	 * 
+	 * @return name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * 
+	 * @return pos
+	 */
+	public Vector2 getPos() {
+		return this.pos;
+	}
+	/**
+	 * 
+	 * @return texture
+	 */
+	public Texture getTexture() {
+		return texture;
+	}
+	/**
+	 * 
+	 * @return pos.x
+	 */
+	public float getxPos() {
+		return pos.x;
+	}
+	/**
+	 * 
+	 * @return pos.y
+	 */
+	public float getyPos() {
+		return this.pos.y;
+	}
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * 
+	 * @param pos
+	 */
+	public void setPos(Vector2 pos) {
+		this.pos = pos;
+	}
+	/**
+	 * 
+	 * @param texture
+	 */
+	public void setTexture(Texture texture) {
+		this.texture = texture;
+	}
+	/**
+	 * 
+	 * @param xPos
+	 */
+	public void setxPos(float xPos) {
+		this.pos.x = xPos;
+	}
+	/**
+	 * 
+	 * @param yPos
+	 */
+	public void setyPos(float yPos) {
+		this.pos.y = yPos;
 	}
 	
 }

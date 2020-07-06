@@ -9,10 +9,19 @@ package com.dalphin.engine.util;
 
 public class RandomUtil {
 
-	
+	/**
+	 * 
+	 * @return random
+	 */
 	public float randomFloat() {
 		return (float) Math.random(); 
 	}
+	/**
+	 * 
+	 * @param min
+	 * @param max
+	 * @return random
+	 */
 	public float randomFloat(int min, int max) {
 		return (float) ((Math.random() * (max - min)) + min);
 	}

@@ -1,4 +1,4 @@
-/* Author: Hunter Barnard
+/** @author: Hunter Barnard
  * 
  * The Purpose of this class is to load textures into memory and manage them
  * It does this by using a get method (currently not in use). It also disposes them
@@ -46,7 +46,10 @@ public class TextureManager {
 	
 	SpriteSheetLoader spriteLoader;
 	
-	//Constructor for the TextureManager taking in nothing
+	/**
+	 * for debugging purposes this needs to be passed in will be deprecated
+	 * @param DebugUtil
+	 */
 	public TextureManager(DebugUtil debugUtil) {
 		
 		this.debugUtil = debugUtil;
@@ -60,7 +63,9 @@ public class TextureManager {
 		spriteLoader  = new SpriteSheetLoader(textureLoader);
 	}
 	
-	//This method loads all the textures into memory and adds it to the arraylist
+	/**
+	 * Method for loading all the textures into memory. This needs to be done or a null pointer will be thrown
+	 */
 	public void loadAllTextures() {
 		
 		//load the missing texture texture and add it to the texture arraylist
@@ -85,12 +90,17 @@ public class TextureManager {
 		
 	}
 	
-	//This method will get a texture - currently not work as I want the ID system to work first
+	/**
+	 * This method for getting a texture
+	 * @return texture
+	 */
 	public Texture getTexture() {
 		return this.brick;
 	}
 	
-	//This disposes of all the textures in the Texture arraylist
+	/**
+	 * This method properly disposes of all textures - do this or else there will be a memory leak
+	 */
 	public void disposeAllTextures() {
 		for(int i = 0; i < textureList.size(); i++) {
 			textureList.get(i).dispose();

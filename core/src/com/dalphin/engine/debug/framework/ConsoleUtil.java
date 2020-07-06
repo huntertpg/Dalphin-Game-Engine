@@ -11,10 +11,6 @@ public class ConsoleUtil {
 		
 	}
 
-	public void printError(String error) {
-		System.out.println("[Error] " + error);
-	}
-	
 	public void printError(int errorCode) {
 		System.out.println("[Error] Code " + errorCode);
 	}
@@ -23,12 +19,26 @@ public class ConsoleUtil {
 		System.out.println("[Error] " + error + " Code " + errorCode);
 	}
 	
-	public void printWarning() {
-
+	public void printError(String error) {
+		System.out.println("[Error] " + error);
+	}
+	
+	public void printLoading() {
+		
 	}
 
-	public void printWarning(String warning) {
-		System.out.println("[Warning] " + warning);
+	public void printLoadingAsset(Object objectType) {
+		if(objectType instanceof Texture) {
+			System.out.println("[Asset Loading] Loading Texture " + ((FileTextureData)((Texture)objectType).getTextureData()).getFileHandle().path());
+		}else if(objectType instanceof Item2D) {
+			System.out.println("[Asset Loading] Loading Item " + ((Item2D) objectType).getName());
+		}else if(objectType instanceof Block2D) {
+			System.out.println("[Asset Loading] Loading Block " + ((Block2D) objectType).getName());
+		}
+	}
+	
+	public void printWarning() {
+
 	}
 	
 	public void printWarning(int warningCode) {
@@ -39,18 +49,8 @@ public class ConsoleUtil {
 		System.out.println("[Error] " + warning + " Code " + warningCode);
 	}
 	
-	public void printLoading() {
-		
-	}
-	
-	public void printLoadingAsset(Object objectType) {
-		if(objectType instanceof Texture) {
-			System.out.println("[Asset Loading] Loading Texture " + ((FileTextureData)((Texture)objectType).getTextureData()).getFileHandle().path());
-		}else if(objectType instanceof Item2D) {
-			System.out.println("[Asset Loading] Loading Item " + ((Item2D) objectType).getName());
-		}else if(objectType instanceof Block2D) {
-			System.out.println("[Asset Loading] Loading Block " + ((Block2D) objectType).getName());
-		}
+	public void printWarning(String warning) {
+		System.out.println("[Warning] " + warning);
 	}
 	
 

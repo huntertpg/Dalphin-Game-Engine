@@ -1,4 +1,4 @@
-/* Author: Hunter Barnard
+/** @author: Hunter Barnard
  * 
  * This class currently doesn't have a purpose -\0^0/-
  * 

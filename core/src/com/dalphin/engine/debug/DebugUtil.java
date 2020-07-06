@@ -4,9 +4,8 @@ import com.dalphin.engine.debug.framework.ConsoleUtil;
 
 public class DebugUtil {
 	
-	private boolean debugging = false;
 	private ConsoleUtil consoleUtil;
-	
+	private boolean debugging = false;
 	public void Debug() {
 		if(debugging) {
 			consoleUtil = new ConsoleUtil();
@@ -15,15 +14,24 @@ public class DebugUtil {
 			System.out.println("[Debugging is Disabled]");
 		}
 	}
-	
+	/**
+	 * 
+	 * @param enableDebugging
+	 */
 	public void enableDebugging(boolean enableDebugging) {
 		this.debugging = enableDebugging;
 	}
-	
+	/**
+	 * 
+	 * @return debugging
+	 */
 	public boolean isEnabled() {
 		return debugging;
 	}
-	
+	/**
+	 * 
+	 * @param ObjectType
+	 */
 	public void printAssetLoading(Object ObjectType) {
 		consoleUtil.printLoadingAsset(ObjectType);
 	}

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -33,7 +34,8 @@ public class Block2D {
 	private BodyDef bodyDef;
 	private FixtureDef fixtureDef;
 	private Fixture fixture;
-	
+	private boolean physicsBody = false;
+	private boolean rotateBlock = false;
 	
 	/**
 	 * 
@@ -174,11 +176,28 @@ public class Block2D {
 	 */
 	public void draw(Batch batch) {
 		if(texture == null) {
-			this.pos = body.getPosition();
-			batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+			if(physicsBody) {
+				this.pos = body.getPosition();
+				if(rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getAngle()* 100);	
+				}else {
+					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+				}
+			}else {
+				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+			}
+				
 		}else {
-			this.pos = body.getPosition();
-			batch.draw(texture, pos.x, pos.y, blockWidth, blockHeight);
+			if(physicsBody) {
+				this.pos = body.getPosition();
+				if(rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getAngle()* 100);	
+				}else {
+					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+				}
+			}else {
+				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+			}
 		}
 		
 	}
@@ -251,6 +270,9 @@ public class Block2D {
 	public float getyPos() {
 		return pos.y;
 	}
+	public Body getBody() {
+		return this.body;
+	}
 	/**
 	 * 
 	 * @param blockHeight
@@ -313,20 +335,23 @@ public class Block2D {
 		
 	}
 	
-	public void createBody(World world) {
+	public void createBody(World world, BodyType bodyType) {
 		bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.type = bodyType;
 		bodyDef.position.set(this.pos);
 		this.body = world.createBody(bodyDef);
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(blockWidth, blockHeight);
+		shape.setAsBox(blockWidth/2, blockHeight/2);
 		fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = density;
 		fixture = body.createFixture(fixtureDef);
 		shape.dispose();
-
+		physicsBody = true;
 	}
 	
+	public void canRotate(boolean rotate) {
+		this.rotateBlock = rotate;
+	}
 	
 }

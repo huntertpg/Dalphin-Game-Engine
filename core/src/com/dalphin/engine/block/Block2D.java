@@ -10,18 +10,31 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.loaders.TextureLoader;
 
 public class Block2D {
 	private int blockHeight = 32;
 	private int blockWidth = 32;
+	private float density = 1f;
 	private DebugUtil debugUtil;
 	private String name;
 	private Vector2 pos;
 	private Texture texture;
 	private TextureLoader textureLoader;
 	private TextureRegion textureRegion;
+	private Body body;
+	private BodyDef bodyDef;
+	private FixtureDef fixtureDef;
+	private Fixture fixture;
+	
+	
 	/**
 	 * 
 	 * @param name
@@ -30,6 +43,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, String path, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.texture = textureLoader.loadTexture(path);
 		this.name = name;
 		pos = new Vector2();
@@ -47,6 +62,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, String path, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.texture = textureLoader.loadTexture(path);
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
@@ -64,6 +81,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, Texture texture, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+
 		this.texture = texture;
 		this.name = name;
 		pos = new Vector2();
@@ -81,6 +100,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, Texture texture, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.name = name;
 		this.texture = texture;
 		this.blockWidth = blockWidth;
@@ -98,6 +119,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, TextureRegion texture, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+
 		this.textureRegion = texture;
 		this.name = name;
 		pos = new Vector2();
@@ -114,6 +137,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
@@ -130,6 +155,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
@@ -147,9 +174,11 @@ public class Block2D {
 	 */
 	public void draw(Batch batch) {
 		if(texture == null) {
-			batch.draw(textureRegion, pos.x, pos.y);	
+			this.pos = body.getPosition();
+			batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
 		}else {
-			batch.draw(texture, pos.x, pos.y);
+			this.pos = body.getPosition();
+			batch.draw(texture, pos.x, pos.y, blockWidth, blockHeight);
 		}
 		
 	}
@@ -278,6 +307,25 @@ public class Block2D {
 	 */
 	public void setyPos(float yPos) {
 		this.pos.y = yPos;
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void createBody(World world) {
+		bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.position.set(this.pos);
+		this.body = world.createBody(bodyDef);
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(blockWidth, blockHeight);
+		fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = density;
+		fixture = body.createFixture(fixtureDef);
+		shape.dispose();
+
 	}
 	
 	

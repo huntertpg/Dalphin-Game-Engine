@@ -13,12 +13,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.managers.AnimationManager;
 import com.dalphin.engine.managers.AssetManager;
-import com.dalphin.engine.managers.BlockManager;
-import com.dalphin.engine.managers.ItemManager;
-import com.dalphin.engine.managers.TextureManager;
 import com.dalphin.engine.player.Player2D;
 import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.player.TestPlayer;
@@ -52,22 +55,23 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	
 	int pos = 0;
 	
-	//This is the main renderer for 2D rendering. It contains the orthagraphic camera and will be 
+	//This is the main renderer for 2D rendering. It contains the orthographic camera and will be 
 	//in charge of rendering for now.
 	Basic2DRenderer renderer;
 	
 	WorldGen world;
 	/**
 	 * This is the create method. This is basically where all the initialization is done to get
-	 * assets loaded up, input managers set, and the initialization of objects such as renderers
+	 * assets loaded up, input managers set, and the initialization of objects such as renderer
 	 * players, etc...
 	 */
 	@Override
 	public void create () {
 		
+		
+		
 		//init the SpriteBatch that is used for rendering things to the screen
 		batch = new SpriteBatch();
-		
 		debugUtil = new DebugUtil();
 		debugUtil.enableDebugging(true);
 		debugUtil.Debug();
@@ -75,6 +79,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		assetManager.InitManagers();
 		world = new WorldGen(assetManager.blockManager(), debugUtil);
 		world.genorateWorld();
+		
 		//init the renderer that creates the camera and will eventually be used for all basic
 		//2D rendering
 		renderer = new Basic2DRenderer(batch, assetManager.textureManager(), 1280, 720);
@@ -131,11 +136,9 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		//this tells the Basic2DRenderer to render things to the screen - this is called every render cycle
 		renderer.render();
 	    elapsedTime += Gdx.graphics.getDeltaTime();
-
 		//This tells the sprite batch to begin another batch to render - all rendering is done between this and .end();
 		batch.begin();
-		world.drawWorld(batch);
-
+		world.drawWorld(batch, elapsedTime);
 		//this draws the player to the screen by obtaining the players texture from the player object, getting the players current
 		//at the current players x and y position
 		//this ends the drawing of things to the screen

@@ -171,9 +171,6 @@ public class Block2D {
 				}else {
 					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
 				}
-			}else {
-				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
-			}
 				
 		}else {
 			if(physicsBody) {
@@ -186,8 +183,6 @@ public class Block2D {
 			}else {
 				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
 			}
-		}
-		
 	}
 	/**
 	 * 

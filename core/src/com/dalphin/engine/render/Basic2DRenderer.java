@@ -10,98 +10,113 @@
 
 package com.dalphin.engine.render;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dalphin.engine.managers.TextureManager;
-import com.dalphin.engine.player.TestPlayer;
-import com.dalphin.engine.util.Animation2D;
+import com.dalphin.engine.debug.DebugUtil;
+import com.dalphin.engine.managers.AssetManager;
+import com.dalphin.engine.player.Player2D;
+import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.util.RandomUtil;
+import com.dalphin.engine.world.WorldGen;
 
 public class Basic2DRenderer {
-	
-	//the default viewport width for camera
+
+	// the default viewport width for camera
 	private int DEFAULTVIEWPORTWIDTH = 1280;
-	
-	//default viewport height for camera
+
+	// default viewport height for camera
 	private int DEFAULTVIEWPORTHEIGHT = 720;
-	
-	//Viewport width and height used for creating camera
+
+	// Viewport width and height used for creating camera
 	private int viewPortWidth;
 	private int viewPortHeight;
-	
-	
-	//declare the camera
+
+	public WorldGen world;
+
+	// declare the camera
 	private OrthographicCamera camera;
-	
-	//declare a spritebatch(currently it is the passed in sprite batch but will be changed later)
-	private SpriteBatch batch;	
-	
-	//declare the texture manager(passed in by the main class)
-	private TextureManager textureManager;
-	
-	//declare the random util for random numbers
+
+	// declare a spritebatch(currently it is the passed in sprite batch but will be
+	// changed later)
+	public SpriteBatch batch;
+	private AssetManager assetManager;
+
+	// declare the texture manager(passed in by the main class)
+
+	// declare the random util for random numbers
 	private RandomUtil randomUtil;
-	
+
+	private DebugUtil debugUtil;
+
+	public Player2DMovement playerMovement;
+	public Player2D player;
 	float elapsedTime = 0;
-	
-	//create the basic 2d renderer from constructor that takes in a sprite batch and a texture manager
-	public Basic2DRenderer(SpriteBatch batch, TextureManager textureManager) {
-		
-		//sets the class batch to the passed in batch
-		this.batch = batch;
-		
-		//sets the texture manager to the passed in manager
-		this.textureManager = textureManager;
-		
-		//sets the cameras viewport width and height to default values as none are provided
+
+	// create the basic 2d renderer from constructor that takes in a sprite batch
+	// and a texture manager
+	public Basic2DRenderer(AssetManager assetManager) {
+
+		// sets the class batch to the passed in batch
+		this.batch = new SpriteBatch();
+
+		// sets the texture manager to the passed in manager
+		this.assetManager = assetManager;
+
+		// sets the cameras viewport width and height to default values as none are
+		// provided
 		this.viewPortWidth = DEFAULTVIEWPORTWIDTH;
 		this.viewPortHeight = DEFAULTVIEWPORTHEIGHT;
-		
-		//init the random util
-		randomUtil = new RandomUtil();
-		
-		//init the camera using the default width and height values
-		camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
-		
-		
+		create();
 	}
-	
-	//Create the basic 2d renderer by passing in a sprite batch, texture manager, and a port width and height for the camera
-	public Basic2DRenderer(SpriteBatch batch, TextureManager textureManager, int viewPortWidth, int viewPortHeight) {
-		
-		//set the local texture manager to the passed in texture manager
-		this.textureManager = textureManager;
-		
-		//set the viewport for the camera to the passed in values
+
+	// Create the basic 2d renderer by passing in a sprite batch, texture manager,
+	// and a port width and height for the camera
+	public Basic2DRenderer(AssetManager assetManager, int viewPortWidth, int viewPortHeight, DebugUtil debugUtil) {
+
+		batch = new SpriteBatch();
+
+		// set the local texture manager to the passed in texture manager
+		this.assetManager = assetManager;
+		this.debugUtil = debugUtil;
+		// set the viewport for the camera to the passed in values
 		this.viewPortWidth = viewPortWidth;
 		this.viewPortHeight = viewPortHeight;
-		
-		//set the local sprite batch to the passed in one
-		this.batch = batch;
-		
-		//init the random util
-		randomUtil = new RandomUtil();
-		
-		//create the camera using the passed in viewport values
-		camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
-		
+		create();
 	}
-	
-	//get the camera from this class
+
+	public void create() {
+		// init the random util
+		randomUtil = new RandomUtil();
+		// create the camera using the passed in viewport values
+		camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
+		batch.setProjectionMatrix(camera.combined);
+		world = new WorldGen(assetManager.blockManager(), debugUtil);
+		world.genorateWorld();
+
+	}
+
+	// get the camera from this class
 	public OrthographicCamera getCamera() {
 		return this.camera;
 	}
-	
-	//this method is what actually renders stuff to the screen, it will use other rendering functions in other classes such as
-	//the world renderer to render things to the screen
+
+	public void update() {
+		
+	}
+
+	// this method is what actually renders stuff to the screen, it will use other
+	// rendering functions in other classes such as
+	// the world renderer to render things to the screen
 	public void render() {
 		batch.setProjectionMatrix(camera.combined);
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		camera.update();
 		batch.begin();
+		world.drawWorld(batch, elapsedTime);
+		playerMovement.update(Gdx.graphics.getDeltaTime());
+		player.draw(batch, assetManager.animationManager(),elapsedTime);
+		
 		batch.end();
 	}
 }

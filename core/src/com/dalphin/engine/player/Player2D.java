@@ -20,9 +20,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.dalphin.engine.managers.AnimationManager;
 import com.dalphin.engine.managers.TextureManager;
 
-public class Player2D extends Actor	{
+public class Player2D	{
 	
 	//this declares the texture manager to get the player texture.
 	private TextureManager textureManager;
@@ -40,7 +41,8 @@ public class Player2D extends Actor	{
 	private Texture texture;
 	
 	//this is the players actual movespeed
-	private float moveSpeed;
+	private float xMoveSpeed;
+	private float yMoveSpeed;
 	
 	//this is the players actual "username"
 	private String name;
@@ -75,8 +77,8 @@ public class Player2D extends Actor	{
 		this.texture = DEFAULTTEXTURE;
 		
 		//sets the players movespeed to the default movespeed since one isn't provided
-		this.moveSpeed = DEFAULTMOVESPEED;
-		
+		this.xMoveSpeed = DEFAULTMOVESPEED;
+		this.yMoveSpeed = DEFAULTMOVESPEED;
 		//sets the players username to the default username since one isn't provided
 		this.name = DEFAULTNAME;
 		
@@ -106,7 +108,7 @@ public class Player2D extends Actor	{
 		this.texture = DEFAULTTEXTURE;
 		
 		//sets the players movespeed to the default movespeed since one wasn't provided
-		this.moveSpeed = DEFAULTMOVESPEED;
+		this.xMoveSpeed = DEFAULTMOVESPEED;
 		
 		//initialize the players position as a vector2
 		this.pos = new Vector2();
@@ -131,7 +133,7 @@ public class Player2D extends Actor	{
 		this.name = name;
 		
 		//sets the players movespeed to the one passed in
-		this.moveSpeed = moveSpeed;
+		this.yMoveSpeed = moveSpeed;
 		
 		//sets the players texture to the default texture since one wasn't provided
 		this.texture = DEFAULTTEXTURE;
@@ -151,12 +153,12 @@ public class Player2D extends Actor	{
 	public Player2D(TextureManager textureManager, String name, float moveSpeed, Texture texture) {
 		//sets the classes texture manager to the passed in texture manager
 		this.textureManager = textureManager;
-		
 		//sets the players username to the passed in username
 		this.name = name;
 		
 		//sets the players movespeed to the passed in move speed
-		this.moveSpeed = moveSpeed;
+		this.xMoveSpeed = moveSpeed;
+		this.yMoveSpeed = moveSpeed;
 		
 		//sets the players texture to the passed in texture
 		this.texture = texture;
@@ -174,7 +176,7 @@ public class Player2D extends Actor	{
 	
 	public void update() {
 		if(physicsBody) {
-			body.setTransform(this.pos, body.getAngle());	
+			body.setTransform((this.pos.x + (this.playerWidth/2)),(this.pos.y + (this.playerHeight / 2)), body.getAngle());	
 		}
 	}
 	
@@ -206,8 +208,18 @@ public class Player2D extends Actor	{
 	 * Gets the players current move speed (not to be confused with current speed of velocity, just the set speed)
 	 * @return float moveSpeed
 	 */
-	public float getPlayerMoveSpeed() {
-		return this.moveSpeed;
+	public float getXMoveSpeed() {
+		return this.xMoveSpeed;
+	}
+	
+	public float getYMoveSpeed() {
+		return this.yMoveSpeed;
+	}
+	public void setXMoveSpeed(float moveSpeed) {
+		this.xMoveSpeed = moveSpeed;
+	}
+	public void setYMoveSpeed(float moveSpeed) {
+		this.yMoveSpeed = moveSpeed;
 	}
 	
 	/**
@@ -267,9 +279,6 @@ public class Player2D extends Actor	{
 	 * sets the players current move speed
 	 * @param speed
 	 */
-	public void setPlayerSpeed(float speed) {
-		this.moveSpeed = speed;
-	}
 
 	/**
 	 * Draws the player using a batch and takes in the elapsed time
@@ -307,5 +316,9 @@ public class Player2D extends Actor	{
 	
 	public Body getBody() {
 		return this.body;
+	}
+
+	public void draw(Batch batch, AnimationManager animationManager, float timeElapsed) {
+		
 	}
 }

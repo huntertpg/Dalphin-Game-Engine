@@ -14,6 +14,7 @@ public class AssetManager {
 	private TextureManager textureManager;
 	private ItemManager itemManager;
 	private BlockManager blockManager;
+	private AnimationManager animationManager;
 	private DebugUtil debug;
 	/**
 	 * 
@@ -30,6 +31,7 @@ public class AssetManager {
 		textureManager.loadAllTextures();
 		itemManager = new ItemManager(textureManager, debug);
 		blockManager = new BlockManager(textureManager, debug);
+		animationManager = new AnimationManager(textureManager);
 	}
 	/**
 	 * 
@@ -57,6 +59,10 @@ public class AssetManager {
 	 */
 	public BlockManager blockManager() {
 		return this.blockManager;
+	}
+	
+	public AnimationManager animationManager() {
+		return this.animationManager;
 	}
 
 }

@@ -23,7 +23,7 @@ import com.dalphin.engine.loaders.TextureLoader;
 public class Block2D {
 	private int blockHeight = 32;
 	private int blockWidth = 32;
-	private float density = 1f;
+	private float density = 1f*((blockHeight/32)*(blockWidth/32));
 	private DebugUtil debugUtil;
 	private String name;
 	private Vector2 pos;
@@ -170,6 +170,8 @@ public class Block2D {
 	}
 	
 	
+	
+	
 	/**
 	 * 
 	 * @param batch
@@ -177,9 +179,10 @@ public class Block2D {
 	public void draw(Batch batch) {
 		if(texture == null) {
 			if(physicsBody) {
-				this.pos = body.getPosition();
+				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2), body.getPosition().y - (blockHeight / 2));
 				if(rotateBlock) {
-					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getAngle()* 100);	
+					batch.draw(textureRegion, pos.x, pos.y, this.blockWidth/2, this.blockHeight/2, blockWidth, blockHeight, 1, 1, body.getTransform().getRotation() * 57);
+					System.out.println(body.getTransform().getRotation());
 				}else {
 					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
 				}
@@ -187,11 +190,13 @@ public class Block2D {
 				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
 			}
 				
-		}else {
+		}else if(texture != null){
 			if(physicsBody) {
-				this.pos = body.getPosition();
+				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2), body.getPosition().y - (blockHeight / 2));
 				if(rotateBlock) {
-					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getAngle()* 100);	
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getTransform().getRotation());
+					System.out.println(body.getTransform().getRotation());
+
 				}else {
 					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
 				}
@@ -338,7 +343,7 @@ public class Block2D {
 	public void createBody(World world, BodyType bodyType) {
 		bodyDef = new BodyDef();
 		bodyDef.type = bodyType;
-		bodyDef.position.set(this.pos);
+		bodyDef.position.set(this.pos.x + (blockWidth / 2), this.pos.y + (blockHeight / 2));
 		this.body = world.createBody(bodyDef);
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(blockWidth/2, blockHeight/2);

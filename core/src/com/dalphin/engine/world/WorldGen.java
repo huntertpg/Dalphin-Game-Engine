@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.dalphin.engine.block.Block2D;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.managers.BlockManager;
@@ -16,16 +15,13 @@ public class WorldGen {
 	private int[] worldLayerTwo;
 	private BlockManager blockManager;
 	public ArrayList<Block2D> worldBlocks = new ArrayList<Block2D>();
-	private World world;
+	
 	/**
 	 * 
 	 * @param blockManager
 	 * @param debug
 	 */
 	public WorldGen(BlockManager blockManager, DebugUtil debug) {
-		
-		world = new World(new Vector2(0,-98f), true);
-		
 		this.debug = debug;
 		this.blockManager = blockManager;
 		worldLayerOne = new int[] 
@@ -59,7 +55,6 @@ public class WorldGen {
 			}else {
 				block = new Block2D(blockManager.getBlock(worldLayerOne[i]).getName(), blockManager.getBlock(worldLayerOne[i]).getTextureRegion(), blockManager.getBlock(worldLayerOne[i]).getBlockWidth(), blockManager.getBlock(worldLayerOne[i]).getBlockHeight());
 				block.setPos(new Vector2(xPos, yPos));
-				block.createBody(world);
 				worldBlocks.add(block);
 				xPos +=32;
 			}
@@ -76,7 +71,6 @@ public class WorldGen {
 			}else {
 				block = new Block2D(blockManager.getBlock(worldLayerTwo[i]).getName(), blockManager.getBlock(worldLayerTwo[i]).getTextureRegion(), blockManager.getBlock(worldLayerTwo[i]).getBlockWidth(), blockManager.getBlock(worldLayerTwo[i]).getBlockHeight());
 				block.setPos(new Vector2(xPos, yPos));
-				block.createBody(world);
 				worldBlocks.add(block);
 				xPos +=32;
 			}
@@ -87,12 +81,9 @@ public class WorldGen {
 	 * 
 	 * @param batch
 	 */
-	public void drawWorld(Batch batch, float elapsedTime) {
-		world.step(elapsedTime, 6, 2);
-
+	public void drawWorld(Batch batch) {
 		for(int i = 0; i < worldBlocks.size(); i++) {
-			worldBlocks.get(i).draw(batch);
-
+			worldBlocks.get(i).draw(batch, 2);
 		}
 	}
 

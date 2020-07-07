@@ -35,6 +35,7 @@ public class Block2D {
 	private Fixture fixture;
 	private boolean physicsBody = false;
 	private boolean rotateBlock = false;
+	private float density = 1f;
 	
 	/**
 	 * 
@@ -183,6 +184,8 @@ public class Block2D {
 			}else {
 				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
 			}
+			}
+		}
 	}
 	/**
 	 * 

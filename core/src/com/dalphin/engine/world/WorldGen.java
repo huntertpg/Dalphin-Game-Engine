@@ -88,13 +88,11 @@ public class WorldGen {
 	 * 
 	 * @param batch
 	 */
-	public void drawWorld(Batch batch) {
 	public void drawWorld(Batch batch, float elapsedTime) {
 		world.step(1/60f, 6, 2);
 
 		for(int i = 0; i < worldBlocks.size(); i++) {
 			worldBlocks.get(i).draw(batch, 2);
+			}
 		}
-	}
-
 }

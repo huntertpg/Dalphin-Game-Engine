@@ -23,6 +23,7 @@ import com.dalphin.engine.loaders.TextureLoader;
 public class Block2D {
 	private int blockHeight = 32;
 	private int blockWidth = 32;
+	private float density = 1f;
 	private DebugUtil debugUtil;
 	private String name;
 	private Vector2 pos;
@@ -44,6 +45,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, String path, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.texture = textureLoader.loadTexture(path);
 		this.name = name;
 		pos = new Vector2();
@@ -61,6 +64,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, String path, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.texture = textureLoader.loadTexture(path);
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
@@ -78,6 +83,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, Texture texture, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+
 		this.texture = texture;
 		this.name = name;
 		pos = new Vector2();
@@ -95,6 +102,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, Texture texture, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.name = name;
 		this.texture = texture;
 		this.blockWidth = blockWidth;
@@ -112,6 +121,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, TextureRegion texture, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+
 		this.textureRegion = texture;
 		this.name = name;
 		pos = new Vector2();
@@ -128,6 +139,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
@@ -144,6 +157,8 @@ public class Block2D {
 	 */
 	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
@@ -161,9 +176,6 @@ public class Block2D {
 	 */
 	public void draw(Batch batch) {
 		if(texture == null) {
-			batch.draw(textureRegion, pos.x, pos.y);	
-		}else {
-			batch.draw(texture, pos.x, pos.y);
 			if(physicsBody) {
 				this.pos = body.getPosition();
 				if(rotateBlock) {
@@ -171,6 +183,9 @@ public class Block2D {
 				}else {
 					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
 				}
+			}else {
+				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+			}
 				
 		}else {
 			if(physicsBody) {
@@ -183,6 +198,8 @@ public class Block2D {
 			}else {
 				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
 			}
+		}
+		
 	}
 	/**
 	 * 

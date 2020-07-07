@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -34,6 +36,8 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	AnimationManager animationManager;
 	
 	AssetManager assetManager;
+	
+	Box2DDebugRenderer debugRender;
 	
 	//Create a sprite batch for rendering - this method will be moved to the renderers later on
 	SpriteBatch batch;
@@ -79,7 +83,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		assetManager.InitManagers();
 		world = new WorldGen(assetManager.blockManager(), debugUtil);
 		world.genorateWorld();
-		
+		debugRender = new Box2DDebugRenderer(true, false, false, false, false, true);
 		//init the renderer that creates the camera and will eventually be used for all basic
 		//2D rendering
 		renderer = new Basic2DRenderer(batch, assetManager.textureManager(), 1280, 720);
@@ -100,7 +104,8 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		playerMovement = new Player2DMovement(input, player, batch, animationManager);
 		
 		assetManager.blockManager().brickTop.setyPos(32);
-		assetManager.blockManager().brickFloor.setyPos(-32);		
+		assetManager.blockManager().brickFloor.setyPos(-32);	
+		player.createBody(world.world, BodyType.DynamicBody);
 		
 	}
 	
@@ -143,7 +148,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		//at the current players x and y position
 		//this ends the drawing of things to the screen
 		playerMovement.update(Gdx.graphics.getDeltaTime());
-		System.out.println(world.worldBlocks.get(0).getPos());
+		//debugRender.render(world.world, renderer.getCamera().combined);
 		batch.end();
 
 		//this method checks for any updates that may occur (such as player input and modifcation to the player position)

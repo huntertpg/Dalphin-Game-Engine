@@ -10,6 +10,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.loaders.TextureLoader;
 
@@ -22,6 +29,13 @@ public class Block2D {
 	private Texture texture;
 	private TextureLoader textureLoader;
 	private TextureRegion textureRegion;
+	private Body body;
+	private BodyDef bodyDef;
+	private FixtureDef fixtureDef;
+	private Fixture fixture;
+	private boolean physicsBody = false;
+	private boolean rotateBlock = false;
+	
 	/**
 	 * 
 	 * @param name
@@ -150,6 +164,28 @@ public class Block2D {
 			batch.draw(textureRegion, pos.x, pos.y);	
 		}else {
 			batch.draw(texture, pos.x, pos.y);
+			if(physicsBody) {
+				this.pos = body.getPosition();
+				if(rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getAngle()* 100);	
+				}else {
+					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+				}
+			}else {
+				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+			}
+				
+		}else {
+			if(physicsBody) {
+				this.pos = body.getPosition();
+				if(rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getAngle()* 100);	
+				}else {
+					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+				}
+			}else {
+				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+			}
 		}
 		
 	}
@@ -222,6 +258,9 @@ public class Block2D {
 	public float getyPos() {
 		return pos.y;
 	}
+	public Body getBody() {
+		return this.body;
+	}
 	/**
 	 * 
 	 * @param blockHeight
@@ -280,5 +319,27 @@ public class Block2D {
 		this.pos.y = yPos;
 	}
 	
+	public void update() {
+		
+	}
+	
+	public void createBody(World world, BodyType bodyType) {
+		bodyDef = new BodyDef();
+		bodyDef.type = bodyType;
+		bodyDef.position.set(this.pos);
+		this.body = world.createBody(bodyDef);
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(blockWidth/2, blockHeight/2);
+		fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = density;
+		fixture = body.createFixture(fixtureDef);
+		shape.dispose();
+		physicsBody = true;
+	}
+	
+	public void canRotate(boolean rotate) {
+		this.rotateBlock = rotate;
+	}
 	
 }

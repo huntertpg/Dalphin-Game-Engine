@@ -12,6 +12,13 @@ package com.dalphin.engine.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dalphin.engine.managers.TextureManager;
 
@@ -42,6 +49,12 @@ public class Player2D extends Actor	{
 	private Vector2 pos;
 	private float playerWidth;
 	private float playerHeight;
+	
+	private Body body;
+	private BodyDef bodyDef;
+	private FixtureDef fixtureDef;
+	private Fixture fixture;
+	private boolean physicsBody = false;
 	
 	/**
 	 * This constructor creates a player by passing in a texture manager as it will
@@ -160,7 +173,9 @@ public class Player2D extends Actor	{
 	 */
 	
 	public void update() {
-		
+		if(physicsBody) {
+			body.setTransform(this.pos, body.getAngle());	
+		}
 	}
 	
 	/**
@@ -273,5 +288,24 @@ public class Player2D extends Actor	{
 	 */
 	public void draw(Batch batch, float elapsedTime, float xPos, float yPos) {
 		batch.draw(this.texture, this.pos.x, this.pos.y);
+	}
+	
+	public void createBody(World world, BodyType bodyType) {
+		bodyDef = new BodyDef();
+		bodyDef.type = bodyType;
+		bodyDef.position.set(this.pos);
+		this.body = world.createBody(bodyDef);
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(playerWidth/2, playerHeight/2);
+		fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		fixture = body.createFixture(fixtureDef);
+		shape.dispose();
+		physicsBody = true;
+	}
+	
+	public Body getBody() {
+		return this.body;
 	}
 }

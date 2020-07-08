@@ -13,11 +13,14 @@ package com.dalphin.engine.render;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.managers.AssetManager;
 import com.dalphin.engine.player.Player2D;
 import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.util.RandomUtil;
+import com.dalphin.engine.world.WorldDef;
 import com.dalphin.engine.world.WorldGen;
 
 public class Basic2DRenderer {
@@ -32,7 +35,7 @@ public class Basic2DRenderer {
 	private int viewPortWidth;
 	private int viewPortHeight;
 
-	public WorldGen world;
+	//public WorldGen world;
 
 	// declare the camera
 	private OrthographicCamera camera;
@@ -52,6 +55,8 @@ public class Basic2DRenderer {
 	public Player2DMovement playerMovement;
 	public Player2D player;
 	float elapsedTime = 0;
+	
+	WorldDef worldDef;
 
 	// create the basic 2d renderer from constructor that takes in a sprite batch
 	// and a texture manager
@@ -75,6 +80,7 @@ public class Basic2DRenderer {
 	public Basic2DRenderer(AssetManager assetManager, int viewPortWidth, int viewPortHeight, DebugUtil debugUtil) {
 
 		batch = new SpriteBatch();
+		worldDef = new WorldDef(assetManager.blockManager());
 
 		// set the local texture manager to the passed in texture manager
 		this.assetManager = assetManager;
@@ -82,6 +88,7 @@ public class Basic2DRenderer {
 		// set the viewport for the camera to the passed in values
 		this.viewPortWidth = viewPortWidth;
 		this.viewPortHeight = viewPortHeight;
+
 		create();
 	}
 
@@ -91,9 +98,9 @@ public class Basic2DRenderer {
 		// create the camera using the passed in viewport values
 		camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
 		batch.setProjectionMatrix(camera.combined);
-		world = new WorldGen(assetManager.blockManager(), debugUtil);
-		world.genorateWorld();
-
+		//world = new WorldGen(assetManager.blockManager(), debugUtil);
+		//world.genorateWorld();
+		worldDef.genWorld(debugUtil);		
 	}
 
 	// get the camera from this class
@@ -113,10 +120,10 @@ public class Basic2DRenderer {
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		camera.update();
 		batch.begin();
-		world.drawWorld(batch, elapsedTime);
+		//world.drawWorld(batch, elapsedTime);
+		worldDef.renderWorld(batch);
 		playerMovement.update(Gdx.graphics.getDeltaTime());
 		player.draw(batch, assetManager.animationManager(),elapsedTime);
-		
 		batch.end();
 	}
 }

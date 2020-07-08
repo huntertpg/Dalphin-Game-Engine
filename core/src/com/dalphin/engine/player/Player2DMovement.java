@@ -31,24 +31,36 @@ public class Player2DMovement {
 		elapsedTime += deltaTime;
 		if(keyboardInputHandler.isUp()) {
 			player.setYMoveSpeed(2);
-			player.getBody().applyForceToCenter(new Vector2(0, 1), true);
+			if(player.getBody() != null) {
+				player.getBody().applyForceToCenter(new Vector2(0, 1), true);	
+			}
 			player.setPlayerY(player.getPlayerY() + player.getYMoveSpeed());
 		} else if(keyboardInputHandler.isDown()) {
 			player.setYMoveSpeed(-2);
-			player.getBody().applyForceToCenter(new Vector2(0, -1), true);
+			if(player.getBody() != null) {
+				player.getBody().applyForceToCenter(new Vector2(0, -1), true);	
+			}
 			player.setPlayerY(player.getPlayerY() + player.getYMoveSpeed());
 		} else if(keyboardInputHandler.isLeft()) {
 			player.setXMoveSpeed(-2);
-			player.getBody().applyForceToCenter(new Vector2(-1, 0), true);
+			if(player.getBody() != null) {
+				player.getBody().applyForceToCenter(new Vector2(-1, 0), true);	
+			}
 			player.setPlayerX(player.getPlayerX() + player.getXMoveSpeed());
 		} else if(keyboardInputHandler.isRight()) {
 			player.setXMoveSpeed(2);
-			player.getBody().applyForceToCenter(new Vector2(1, 0), true);
+			if(player.getBody() != null) {
+				player.getBody().applyForceToCenter(new Vector2(1, 0), true);	
+			}
 			player.setPlayerX(player.getPlayerX() + player.getXMoveSpeed());
+			
 		}else {
 			player.setYMoveSpeed(0);
 			player.setXMoveSpeed(0);
-			player.getBody().applyForceToCenter(new Vector2(0, 0), true);
+			if(player.getBody() != null) {
+				player.getBody().applyForceToCenter(new Vector2(0, 0), true);	
+			}
+			
 		}
 	}
 

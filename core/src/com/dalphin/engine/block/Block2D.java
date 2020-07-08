@@ -182,7 +182,6 @@ public class Block2D {
 				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2), body.getPosition().y - (blockHeight / 2));
 				if(rotateBlock) {
 					batch.draw(textureRegion, pos.x, pos.y, this.blockWidth/2, this.blockHeight/2, blockWidth, blockHeight, 1, 1, body.getTransform().getRotation() * 57);
-					System.out.println(body.getTransform().getRotation());
 				}else {
 					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
 				}
@@ -195,7 +194,6 @@ public class Block2D {
 				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2), body.getPosition().y - (blockHeight / 2));
 				if(rotateBlock) {
 					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getTransform().getRotation());
-					System.out.println(body.getTransform().getRotation());
 
 				}else {
 					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
@@ -358,5 +356,14 @@ public class Block2D {
 	public void canRotate(boolean rotate) {
 		this.rotateBlock = rotate;
 	}
+	
+	public Block2D createBlock() {
+		return new Block2D(this.getName(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
+	}
+	
+	public DebugUtil getDebug() {
+		return this.debugUtil;
+	}
+	
 	
 }

@@ -6,8 +6,8 @@ import com.dalphin.engine.debug.DebugUtil;
 
 public class ItemAxe extends Item2D{
 
-	public ItemAxe(String name, TextureRegion dungeonSpriteSheet, DebugUtil debugUtil) {
-		super(name, dungeonSpriteSheet, debugUtil);
+	public ItemAxe(String name, TextureRegion texture, int textureXOffset, int textureYOffset, int textureWidth, int textureHeight, DebugUtil debug) {
+		super(name, texture, textureXOffset, textureYOffset,textureWidth, textureHeight, debug);
 	}
 
 }

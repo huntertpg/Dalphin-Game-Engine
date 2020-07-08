@@ -101,14 +101,13 @@ public class LibGDXTestGame extends ApplicationAdapter {
 
 		
 		renderer.playerMovement = playerMovement;
-		player.createBody(renderer.world.world, BodyType.DynamicBody);
+		//player.createBody(renderer.world.world, BodyType.DynamicBody);
 		renderer.player = player;
-		ray = new RayHandler(renderer.world.world);
-		ray.setAmbientLight(.3f);
-		light = new PointLight(ray, 500, new Color(0.4f, 0.2f, 0.1f, 1f), 600, 200, -64);
+		//ray = new RayHandler(renderer.world.world);
+		//ray.setAmbientLight(.3f);
+		//light = new PointLight(ray, 500, new Color(0.4f, 0.2f, 0.1f, 1f), 600, 200, -64);
 		// light = new PointLight(ray, 500, new Color(0.4f, 0.2f, 0.1f,1f), 200, 600,
 		// -64);
-
 	}
 
 	// this method isn't require but is called every render cycle to check for user
@@ -149,7 +148,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		// called every render cycle
 		renderer.render();
 		elapsedTime += Gdx.graphics.getDeltaTime();
-		ray.setCombinedMatrix(renderer.getCamera());
+		//ray.setCombinedMatrix(renderer.getCamera());
 		// This tells the sprite batch to begin another batch to render - all rendering
 		// is done between this and .end();
 
@@ -157,9 +156,9 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		// player object, getting the players current
 		// at the current players x and y position
 		// this ends the drawing of things to the screen
-		debugRender.render(renderer.world.world, renderer.getCamera().combined);
+		//debugRender.render(renderer.world.world, renderer.getCamera().combined);
 
-		ray.updateAndRender();
+		//ray.updateAndRender();
 
 		// this method checks for any updates that may occur (such as player input and
 		// modifcation to the player position)

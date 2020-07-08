@@ -14,7 +14,8 @@ public class BlockBrick extends Block2D{
 	public void draw(Batch batch) {
 		super.draw(batch);
 	}
-	
-	
-
+	@Override
+	public BlockBrick createBlock() {
+		return new BlockBrick(this.getName(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
+	}
 }

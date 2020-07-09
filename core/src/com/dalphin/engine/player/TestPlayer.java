@@ -17,20 +17,29 @@ public class TestPlayer extends Player2D {
 	private boolean isRight;
 	private Player2DMovement movement;
 	private float deltaTime;
-	
-	public TestPlayer(TextureManager textureManager, String name, float moveSpeed, Texture texture) {
-		super(textureManager, name, moveSpeed, texture);
+	/**
+	 * 
+	 * @param textureManager
+	 * @param name
+	 * @param moveSpeed
+	 * @param texture
+	 */
+	public TestPlayer(AnimationManager animationManager, String name, float moveSpeed) {
+		super(animationManager, name, moveSpeed);
 		super.setPlayerWidth(32);
 		super.setPlayerHeight(32);
 		super.setXMoveSpeed(0);
 		super.setYMoveSpeed(0);
-		this.movement = movement;
+		this.setAnimationManager(animationManager);
+		this.addAnimation(animationManager.walkLeftAnimation);
+		this.addAnimation(animationManager.walkRightAnimation);
+		this.addAnimation(animationManager.idleAnimation);
 	}
 	@Override
 	public void update() {
 		super.update();
 		if(getXMoveSpeed() > 0) {
-			isRight = true;
+			isRight = true; 
 		}else if(getXMoveSpeed() < 0) {
 			isLeft = true;
 		}else if(getYMoveSpeed() > 0) {
@@ -44,19 +53,23 @@ public class TestPlayer extends Player2D {
 			isDown = false;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param animationManager
+	 * @param timeElapsed
+	 */
 	@Override
-	public void draw(Batch batch, AnimationManager animationManager, float timeElapsed) {
+	public void draw(Batch batch, float timeElapsed) {
 		if(isUp) {
-			animationManager.walkLeftAnimation.draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
+			getAnimation(0).draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
 		}else if(isDown) {
-			animationManager.walkLeftAnimation.draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
+			getAnimation(0).draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
 		}else if(isLeft) {
-			animationManager.walkLeftAnimation.draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
+			getAnimation(0).draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
 		}else if(isRight) {
-			animationManager.walkRightAnimation.draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
+			getAnimation(1).draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
 		}else {
-			animationManager.idleAnimation.draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
+			getAnimation(2).draw(batch, timeElapsed, this.getPlayerWidth(), this.getPlayerHeight(), this.getPlayerX(), this.getPlayerY());
 		}
 	}
 

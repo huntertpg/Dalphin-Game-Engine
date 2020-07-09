@@ -82,7 +82,6 @@ public class Animation2D {
 
 		for (int j = startColumn; j < columns; j++) {
 			tempFrames[startRow][j].flip(flipX, flipY);
-			System.out.println(animationFrames.length);
 			animationFrames[index++] = tempFrames[startRow][j];
 		}
 
@@ -123,7 +122,6 @@ public class Animation2D {
 					tempFrames[startRow][j].getRegionY() - expansionY, spriteWidth + expansionX,
 					spriteHeight + expansionY);
 			tempFrames[startRow][j].flip(flipX, flipY);
-			System.out.println(animationFrames.length);
 			animationFrames[index++] = tempFrames[startRow][j];
 		}
 
@@ -165,7 +163,6 @@ public class Animation2D {
 					tempFrames[startRow][j].getRegionY() - expansionY, spriteWidth + expansionX,
 					spriteHeight + expansionY);
 			tempFrames[startRow][j].flip(flipX, flipY);
-			System.out.println(animationFrames.length);
 			animationFrames[index++] = tempFrames[startRow][j];
 		}
 

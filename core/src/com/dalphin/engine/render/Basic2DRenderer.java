@@ -15,13 +15,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.managers.AssetManager;
 import com.dalphin.engine.player.Player2D;
 import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.util.RandomUtil;
+import com.dalphin.engine.world.TestWorld;
 import com.dalphin.engine.world.WorldDef;
 import com.dalphin.engine.world.WorldGen;
+import com.dalphin.engine.world.WorldParser;
+
+import box2dLight.RayHandler;
 
 public class Basic2DRenderer {
 
@@ -39,7 +44,7 @@ public class Basic2DRenderer {
 
 	// declare the camera
 	private OrthographicCamera camera;
-
+	Box2DDebugRenderer debugRender;
 	// declare a spritebatch(currently it is the passed in sprite batch but will be
 	// changed later)
 	public SpriteBatch batch;
@@ -56,7 +61,8 @@ public class Basic2DRenderer {
 	public Player2D player;
 	float elapsedTime = 0;
 	
-	WorldDef worldDef;
+	TestWorld testWorld;
+	WorldParser worldParser;
 
 	// create the basic 2d renderer from constructor that takes in a sprite batch
 	// and a texture manager
@@ -80,7 +86,6 @@ public class Basic2DRenderer {
 	public Basic2DRenderer(AssetManager assetManager, int viewPortWidth, int viewPortHeight, DebugUtil debugUtil) {
 
 		batch = new SpriteBatch();
-		worldDef = new WorldDef(assetManager.blockManager());
 
 		// set the local texture manager to the passed in texture manager
 		this.assetManager = assetManager;
@@ -89,7 +94,7 @@ public class Basic2DRenderer {
 		this.viewPortWidth = viewPortWidth;
 		this.viewPortHeight = viewPortHeight;
 
-		create();
+
 	}
 
 	public void create() {
@@ -100,7 +105,13 @@ public class Basic2DRenderer {
 		batch.setProjectionMatrix(camera.combined);
 		//world = new WorldGen(assetManager.blockManager(), debugUtil);
 		//world.genorateWorld();
-		worldDef.genWorld(debugUtil);		
+		debugRender = new Box2DDebugRenderer(true, false, false, false, false, true);
+		testWorld = new TestWorld(assetManager.blockManager(), new Vector2(0, 0f));
+		testWorld.genWorld(debugUtil);
+		testWorld.setCamera(getCamera());
+		player.createBody(testWorld.getWorld(), BodyType.DynamicBody);
+		testWorld.getPlayers().add(player);
+		worldParser = new WorldParser(testWorld, "Test World");
 	}
 
 	// get the camera from this class
@@ -121,9 +132,11 @@ public class Basic2DRenderer {
 		camera.update();
 		batch.begin();
 		//world.drawWorld(batch, elapsedTime);
-		worldDef.renderWorld(batch);
+		
 		playerMovement.update(Gdx.graphics.getDeltaTime());
-		player.draw(batch, assetManager.animationManager(),elapsedTime);
+		player.draw(batch, elapsedTime);
+		testWorld.renderWorld(batch, elapsedTime);
+		//debugRender.render(testWorld.getWorld(), camera.combined);
 		batch.end();
 	}
 }

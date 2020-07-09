@@ -91,7 +91,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		// init a player object (currenly just used for testing)
 		Gdx.input.setInputProcessor(input);
 
-		player = new TestPlayer(assetManager.textureManager(), "Test", 100, assetManager.textureManager().playerSheet);
+		player = new TestPlayer(assetManager.animationManager(), "Test", 100);
 		playerMovement = new Player2DMovement(player, input, renderer.batch, assetManager.animationManager());
 		
 		// set the default input processor to the keyboard input manager - this needs to
@@ -99,10 +99,11 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		// input from the input manager will not work
 
 
-		
+		 
 		renderer.playerMovement = playerMovement;
 		//player.createBody(renderer.world.world, BodyType.DynamicBody);
 		renderer.player = player;
+		renderer.create();
 		//ray = new RayHandler(renderer.world.world);
 		//ray.setAmbientLight(.3f);
 		//light = new PointLight(ray, 500, new Color(0.4f, 0.2f, 0.1f, 1f), 600, 200, -64);

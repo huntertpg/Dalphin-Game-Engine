@@ -59,7 +59,14 @@ public class Item2D {
 			debug.printAssetLoading(this);
 		}
 	}
-	
+	/**
+	 * 
+	 * @param name
+	 * @param texture
+	 * @param textureWidth
+	 * @param textureHeight
+	 * @param debug
+	 */
 	public Item2D(String name, TextureRegion texture, int textureWidth, int textureHeight, DebugUtil debug) {
 		this.textureRegion = texture;
 		this.textureRegion.setRegion(texture.getRegionX(), texture.getRegionY(), texture.getRegionWidth() + textureWidth, texture.getRegionHeight() + textureHeight);
@@ -69,7 +76,16 @@ public class Item2D {
 			debug.printAssetLoading(this);
 		}
 	}
-	
+	/**
+	 * 
+	 * @param name
+	 * @param texture
+	 * @param textureXOffset
+	 * @param textureYOffset
+	 * @param textureWidth
+	 * @param textureHeight
+	 * @param debug
+	 */
 	public Item2D(String name, TextureRegion texture, int textureXOffset, int textureYOffset, int textureWidth, int textureHeight, DebugUtil debug) {
 		this.textureRegion = texture;
 		this.textureRegion.setRegion(texture.getRegionX() + textureXOffset, texture.getRegionY() + textureYOffset, texture.getRegionWidth() + textureWidth, texture.getRegionHeight() + textureHeight);
@@ -198,7 +214,11 @@ public class Item2D {
 	public void setItemHeight(float height) {
 		this.itemHeight = height;
 	}
-	
+	/**
+	 * 
+	 * @param world
+	 * @param bodyType
+	 */
 	public void createBody(World world, BodyType bodyType) {
 		bodyDef = new BodyDef();
 		bodyDef.type = bodyType;
@@ -213,7 +233,10 @@ public class Item2D {
 		shape.dispose();
 		physicsBody = true;
 	}
-	
+	/**
+	 * 
+	 * @param rotate
+	 */
 	public void canRotate(boolean rotate) {
 		this.rotateBlock = rotate;
 	}

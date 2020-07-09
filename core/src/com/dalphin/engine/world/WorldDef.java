@@ -1,12 +1,16 @@
 package com.dalphin.engine.world;
 
 import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.dalphin.engine.block.Block2D;
 import com.dalphin.engine.debug.DebugUtil;
 import com.dalphin.engine.item.Item2D;
+import com.dalphin.engine.managers.AnimationManager;
 import com.dalphin.engine.managers.BlockManager;
 import com.dalphin.engine.player.Player2D;
 
@@ -16,15 +20,18 @@ import box2dLight.RayHandler;
 public class WorldDef {
 
 	private BlockManager blockManager;
+	private AnimationManager animationManager;
 
+	private OrthographicCamera camera;
 	private DebugUtil debugUtil;
 	private Vector2 gravity;
 	private ArrayList<Item2D> items;
 	private ArrayList<Light> lights;
 	private ArrayList<Player2D> players;
+	private ArrayList<Block2D> worldBlocks;
 	private RayHandler rayHandler;
 	private World world;
-	private ArrayList<Block2D> worldBlocks;
+	
 
 	public WorldDef(BlockManager blockManager) {
 		gravity = new Vector2(0, 0);
@@ -33,7 +40,7 @@ public class WorldDef {
 		items = new ArrayList<Item2D>();
 		world = new World(new Vector2(gravity.x, gravity.y), true);
 		lights = new ArrayList<Light>();
-		
+
 		this.blockManager = blockManager;
 	}
 
@@ -44,7 +51,7 @@ public class WorldDef {
 		items = new ArrayList<Item2D>();
 		world = new World(new Vector2(gravityX, gravityY), true);
 		lights = new ArrayList<Light>();
-		
+
 		this.blockManager = blockManager;
 	}
 
@@ -65,8 +72,10 @@ public class WorldDef {
 		worldBlocks = new ArrayList<Block2D>();
 		players = new ArrayList<Player2D>();
 		items = new ArrayList<Item2D>();
+		lights = new ArrayList<Light>();
+
 		world = new World(new Vector2(gravity.x, gravity.y), true);
-		
+
 		this.blockManager = blockManager;
 	}
 
@@ -75,11 +84,15 @@ public class WorldDef {
 		worldBlocks = new ArrayList<Block2D>();
 		players = new ArrayList<Player2D>();
 		items = new ArrayList<Item2D>();
-		world = new World(new Vector2(gravity.x, gravity.y), true);
 		lights = new ArrayList<Light>();
+		world = new World(new Vector2(gravity.x, gravity.y), true);
 
 		this.rayHandler = rayHandler;
 		this.blockManager = blockManager;
+	}
+
+	public void createRayHandler() {
+		rayHandler = new RayHandler(world);
 	}
 
 	public void genWorld(DebugUtil debugUtil) {
@@ -87,13 +100,56 @@ public class WorldDef {
 	}
 	
 
-	public void renderWorld(Batch batch) {
+	/**
+	 * @return the worldBlocks
+	 */
+	public ArrayList<Block2D> getWorldBlocks() {
+		return worldBlocks;
+	}
+
+	public void renderWorld(Batch batch, float elapsedTime) {
+		if (worldBlocks.size() >= 0) {
+			for (int i = 0; i < worldBlocks.size(); i++) {
+				worldBlocks.get(i).draw(batch);
+			}
+		}
+
+		if (players.size() >= 0) {
+			for (int i = 0; i < players.size(); i++) {
+				players.get(i).draw(batch, elapsedTime);
+			}
+		}
+
+		if (rayHandler != null) {
+			batch.end();
+			if(camera != null) {
+				rayHandler.setCombinedMatrix(camera);
+			}
+			rayHandler.render();
+			batch.begin();
+		}
+
+		if (items.size() >= 0) {
+			for (int i = 0; i < items.size(); i++) {
+				items.get(i).draw(batch);
+			}
+		}
+		updateWorld();
 
 	}
-	
 
 	public void updateWorld() {
-
+		rayHandler.update();
+		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+	}
+	
+	public void dispose() {
+		if(rayHandler != null) {
+			rayHandler.dispose();
+		}
+		if(world != null) {
+			world.dispose();
+		}
 	}
 
 	/**
@@ -101,6 +157,13 @@ public class WorldDef {
 	 */
 	public BlockManager getBlockManager() {
 		return blockManager;
+	}
+
+	/**
+	 * @return the camera
+	 */
+	public OrthographicCamera getCamera() {
+		return camera;
 	}
 
 	/**
@@ -153,18 +216,17 @@ public class WorldDef {
 	}
 
 	/**
-	 * @return the worldBlocks
-	 */
-	public ArrayList<Block2D> getWorldBlocks() {
-		return worldBlocks;
-	}
-
-
-	/**
 	 * @param blockManager the blockManager to set
 	 */
 	public void setBlockManager(BlockManager blockManager) {
 		this.blockManager = blockManager;
+	}
+
+	/**
+	 * @param camera the camera to set
+	 */
+	public void setCamera(OrthographicCamera camera) {
+		this.camera = camera;
 	}
 
 	/**
@@ -224,8 +286,18 @@ public class WorldDef {
 		this.worldBlocks = worldBlocks;
 	}
 	
-	public void createRayHandler() {
-		rayHandler = new RayHandler(world);
+	/**
+	 * @return the animationManager
+	 */
+	public AnimationManager getAnimationManager() {
+		return animationManager;
+	}
+
+	/**
+	 * @param animationManager the animationManager to set
+	 */
+	public void setAnimationManager(AnimationManager animationManager) {
+		this.animationManager = animationManager;
 	}
 
 }

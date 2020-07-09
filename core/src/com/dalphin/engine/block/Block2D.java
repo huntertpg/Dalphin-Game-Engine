@@ -144,7 +144,7 @@ public class Block2D {
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
-		this.blockHeight = blockHeight;
+		this.blockHeight = blockHeight; 
 		pos = new Vector2();
 	}
 	/**
@@ -334,10 +334,19 @@ public class Block2D {
 		this.pos.y = yPos;
 	}
 	
+	/**
+	 * This is the update method for the block - probably doesn't need to be updated 
+	 */
 	public void update() {
 		
 	}
 	
+	/**
+	 * This function creates the physical body of the block. This is for floors and other tiles that don't need physical reaction (this
+	 * is optional for right now but layered rendering might be a thing later on so light doesn't get blocked by the floor).
+	 * @param world
+	 * @param bodyType
+	 */
 	public void createBody(World world, BodyType bodyType) {
 		bodyDef = new BodyDef();
 		bodyDef.type = bodyType;
@@ -353,14 +362,26 @@ public class Block2D {
 		physicsBody = true;
 	}
 	
+	/**
+	 * This is method that simply sets the block to rotate to the physical body of the block.
+	 * @param rotate
+	 */
 	public void canRotate(boolean rotate) {
 		this.rotateBlock = rotate;
 	}
 	
+	/**
+	 * This method returns a new block. This is mainly for world gen right now.
+	 * @return Block2D
+	 */
 	public Block2D createBlock() {
 		return new Block2D(this.getName(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
 	}
 	
+	/**
+	 * This gets the debugUtil for the class
+	 * @return debugUtil
+	 */
 	public DebugUtil getDebug() {
 		return this.debugUtil;
 	}

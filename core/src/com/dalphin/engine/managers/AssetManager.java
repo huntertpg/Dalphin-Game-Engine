@@ -60,7 +60,10 @@ public class AssetManager {
 	public BlockManager blockManager() {
 		return this.blockManager;
 	}
-	
+	/**
+	 * 
+	 * @return assetManager
+	 */
 	public AnimationManager animationManager() {
 		return this.animationManager;
 	}

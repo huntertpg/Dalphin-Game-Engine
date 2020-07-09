@@ -30,6 +30,8 @@ public class Player2D	{
 	//this declares the texture manager to get the player texture.
 	private TextureManager textureManager;
 	
+	private AnimationManager animationManager;
+	
 	//this creates the players default texture if one isn't provided
 	private Texture DEFAULTTEXTURE;
 	
@@ -118,7 +120,6 @@ public class Player2D	{
 		//initialize the players position as a vector2
 		this.pos = new Vector2();
 	}
-	
 	/**
 	 * Creates the player using a constructor that takes in a TextureManager, a Name and the Player Move Speed
 	 * @param TextureManager
@@ -174,6 +175,22 @@ public class Player2D	{
 		
 	}
 	
+	public Player2D(AnimationManager animationManager, String name, float moveSpeed) {
+		animations = new ArrayList<Animation2D>();
+		//sets the players username to the passed in username
+		this.name = name;
+		
+		//sets the players movespeed to the passed in move speed
+		this.xMoveSpeed = moveSpeed;
+		this.yMoveSpeed = moveSpeed;
+		
+		this.animationManager = animationManager;
+		
+		//initialize the players position as a vector2
+		this.pos = new Vector2();
+		
+	}
+	
 	/**
 	 * This will be used for updating the players position once the player input manager is made
 	 * will also be used to keep track of positional and texture data
@@ -217,13 +234,24 @@ public class Player2D	{
 	public float getXMoveSpeed() {
 		return this.xMoveSpeed;
 	}
-	
+	/**
+	 * 
+	 * @return yMoveSpeed
+	 */
 	public float getYMoveSpeed() {
 		return this.yMoveSpeed;
 	}
+	/**
+	 * 
+	 * @param moveSpeed
+	 */
 	public void setXMoveSpeed(float moveSpeed) {
 		this.xMoveSpeed = moveSpeed;
 	}
+	/**
+	 * 
+	 * @param moveSpeed
+	 */
 	public void setYMoveSpeed(float moveSpeed) {
 		this.yMoveSpeed = moveSpeed;
 	}
@@ -282,11 +310,6 @@ public class Player2D	{
 	}
 	
 	/**
-	 * sets the players current move speed
-	 * @param speed
-	 */
-
-	/**
 	 * Draws the player using a batch and takes in the elapsed time
 	 * @param Batch
 	 * @param float elapsedTime
@@ -304,7 +327,11 @@ public class Player2D	{
 	public void draw(Batch batch, float elapsedTime, float xPos, float yPos) {
 		batch.draw(this.texture, this.pos.x, this.pos.y);
 	}
-	
+	/**
+	 * 
+	 * @param world
+	 * @param bodyType
+	 */
 	public void createBody(World world, BodyType bodyType) {
 		bodyDef = new BodyDef();
 		bodyDef.type = bodyType;
@@ -319,20 +346,50 @@ public class Player2D	{
 		shape.dispose();
 		physicsBody = true;
 	}
-	
+	/**
+	 * 
+	 * @param animation
+	 */
 	public void addAnimation(Animation2D animation) {
 		this.animations.add(animation);
 	}
-	
+	/**
+	 * 
+	 * @return body
+	 */
 	public Body getBody() {
-		return this.body;
+		if(this.body == null) {
+			return null;
+		}else {
+			return this.body;	
+		}
 	}
-
-	public void draw(Batch batch, AnimationManager animationManager, float timeElapsed) {
-		
-	}
-	
+	/**
+	 * 
+	 * @param batch
+	 * @param animationManager
+	 * @param timeElapsed
+	 */
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public Animation2D getAnimation(int index) {
 		return this.animations.get(index);
+	}
+
+	/**
+	 * @return the animationManager
+	 */
+	public AnimationManager getAnimationManager() {
+		return animationManager;
+	}
+
+	/**
+	 * @param animationManager the animationManager to set
+	 */
+	public void setAnimationManager(AnimationManager animationManager) {
+		this.animationManager = animationManager;
 	}
 }

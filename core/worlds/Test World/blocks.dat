@@ -1,46 +1,49 @@
-0:B 32:X 0:Y t:P s:BT t:R
-0:B 64:X 0:Y t:P s:BT t:R
-0:B 96:X 0:Y t:P s:BT t:R
-0:B 128:X 0:Y t:P s:BT t:R
-0:B 160:X 0:Y t:P s:BT t:R
-0:B 192:X 0:Y t:P s:BT t:R
-0:B 224:X 0:Y t:P s:BT t:R
+0:B 32:X 0:Y t:P s:BT t:R 0:RV
+0:B 64:X 0:Y t:P s:BT t:R 0:RV
+0:B 96:X 0:Y t:P s:BT t:R 0:RV
+0:B 128:X 0:Y t:P s:BT t:R 0:RV
+0:B 160:X 0:Y t:P s:BT t:R 0:RV
+0:B 192:X 0:Y t:P s:BT t:R 0:RV
+0:B 224:X 0:Y t:P s:BT t:R 0:RV
 
-1:B 32:X -32:Y f:P s:BT t:R
-1:B 64:X -32:Y f:P s:BT t:R
-1:B 96:X -32:Y f:P s:BT t:R
-1:B 128:X -32:Y f:P s:BT t:R
-1:B 160:X -32:Y f:P s:BT t:R
-1:B 192:X -32:Y f:P s:BT t:R
-1:B 224:X -32:Y f:P s:BT t:R
+1:B 32:X -32:Y f:P s:BT t:R 0:RV
+1:B 64:X -32:Y f:P s:BT t:R 0:RV
+1:B 96:X -32:Y f:P s:BT t:R 0:RV
+1:B 128:X -32:Y f:P s:BT t:R 0:RV
+1:B 160:X -32:Y f:P s:BT t:R 0:RV
+1:B 192:X -32:Y f:P s:BT t:R 0:RV
+1:B 224:X -32:Y f:P s:BT t:R 0:RV
 
-2:B 32:X -64:Y f:P d:BT t:R
-2:B 64:X -64:Y f:P d:BT t:R
-2:B 96:X -64:Y f:P d:BT t:R
-2:B 128:X -64:Y f:P d:BT t:R
-2:B 160:X -64:Y f:P d:BT t:R
-2:B 192:X -64:Y f:P d:BT t:R
-2:B 224:X -64:Y f:P d:BT t:R
-2:B 32:X -96:Y f:P d:BT t:R
-2:B 64:X -96:Y f:P d:BT t:R
-2:B 96:X -96:Y f:P d:BT t:R
-2:B 128:X -96:Y f:P d:BT t:R
-2:B 160:X -96:Y f:P d:BT t:R
-2:B 192:X -96:Y f:P d:BT t:R
-2:B 224:X -96:Y f:P d:BT t:R
-2:B 32:X -128:Y f:P d:BT t:R
-2:B 64:X -128:Y f:P d:BT t:R
-2:B 96:X -128:Y f:P d:BT t:R
-2:B 128:X -128:Y f:P d:BT t:R
-2:B 160:X -128:Y f:P d:BT t:R
-2:B 192:X -128:Y f:P d:BT t:R
-2:B 224:X -128:Y f:P d:BT t:R
+2:B 32:X -64:Y f:P d:BT t:R 0:RV
+2:B 64:X -64:Y f:P d:BT t:R 0:RV
+2:B 96:X -64:Y f:P d:BT t:R 0:RV
+2:B 128:X -64:Y f:P d:BT t:R 0:RV
+2:B 160:X -64:Y f:P d:BT t:R 0:RV
+2:B 192:X -64:Y f:P d:BT t:R 0:RV
+2:B 224:X -64:Y f:P d:BT t:R 0:RV
+2:B 32:X -96:Y f:P d:BT t:R 0:RV
+2:B 64:X -96:Y f:P d:BT t:R 0:RV
+2:B 96:X -96:Y f:P d:BT t:R 0:RV
+2:B 128:X -96:Y f:P d:BT t:R 0:RV
+2:B 160:X -96:Y f:P d:BT t:R 0:RV
+2:B 192:X -96:Y f:P d:BT t:R 0:RV
+2:B 224:X -96:Y f:P d:BT t:R 0:RV
+2:B 32:X -128:Y f:P d:BT t:R 0:RV
+2:B 64:X -128:Y f:P d:BT t:R 0:RV
+2:B 96:X -128:Y f:P d:BT t:R 0:RV
+2:B 128:X -128:Y f:P d:BT t:R 0:RV
+2:B 160:X -128:Y f:P d:BT t:R 0:RV
+2:B 192:X -128:Y f:P d:BT t:R 0:RV
+2:B 224:X -128:Y f:P d:BT t:R 0:RV
 
-4:B 0:X -32:Y t:P s:BT t:R
-3:B 32:X -32:Y t:P s:BT t:R
-4:B 0:X -64:Y t:P s:BT t:R
-3:B 32:X -64:Y t:P s:BT t:R
-4:B 0:X -96:Y t:P s:BT t:R
-3:B 32:X -96:Y t:P s:BT t:R
-5:B 0:X -128:Y t:P s:BT t:R
-6:B 32:X -128:Y t:P s:BT t:R
+2:B 224:X -128:Y t:P d:BT t:R 0:RV
+
+
+4:B 0:X -32:Y t:P s:BT t:R 0:RV
+3:B 32:X -32:Y t:P s:BT t:R 0:RV
+4:B 0:X -64:Y t:P s:BT t:R 0:RV
+3:B 32:X -64:Y t:P s:BT t:R 0:RV
+4:B 0:X -96:Y t:P s:BT t:R 0:RV
+3:B 32:X -96:Y t:P s:BT t:R 0:RV
+5:B 0:X -128:Y t:P s:BT t:R 0:RV
+6:B 32:X -128:Y t:P s:BT t:R 0:RV

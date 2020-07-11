@@ -24,14 +24,14 @@ public class BlockManager {
 	 * @param debug
 	 */
 	public BlockManager(TextureManager textureManager, DebugUtil debug) {
-		blocks.add(brickTop = new BlockBrick("Brick Top", textureManager.dungeonSpriteSheet[0][1], 32, 32, debug));
-		blocks.add(brick = new BlockBrick("Brick", textureManager.dungeonSpriteSheet[1][1], 32, 32, debug));
-		blocks.add(brickFloor = new BlockBrick("Brick Floor", textureManager.dungeonSpriteSheet[4][1], 32, 32, debug));
-		blocks.add(blockWallRight = new BlockBrick("Brick Wall Right", textureManager.dungeonSpriteSheet[8][1], 32, 32, debug));
-		blocks.add(blockWallLeft = new BlockBrick("Brick Wall Left", textureManager.dungeonSpriteSheet[8][0], 32, 32, debug));
-		blocks.add(blockWallEndLeft = new BlockBrick("Brick Wall End Left", textureManager.dungeonSpriteSheet[9][0], 32, 32, debug));
-		blocks.add(blockWallEndRight = new BlockBrick("Brick Wall End Right", textureManager.dungeonSpriteSheet[9][1], 32, 32, debug));
-		blocks.add(blockWallCornerTopLeft = new BlockBrick("Brick Wall Corner Top Left", textureManager.dungeonSpriteSheet[7][2], 32, 32, debug));
+		blocks.add(brickTop = new BlockBrick("Brick Top", this.blocks.size(), textureManager.dungeonSpriteSheet[0][1], 32, 32, debug));
+		blocks.add(brick = new BlockBrick("Brick", this.blocks.size(), textureManager.dungeonSpriteSheet[1][1], 32, 32, debug));
+		blocks.add(brickFloor = new BlockBrick("Brick Floor", this.blocks.size(), textureManager.dungeonSpriteSheet[4][1], 32, 32, debug));
+		blocks.add(blockWallRight = new BlockBrick("Brick Wall Right", this.blocks.size(), textureManager.dungeonSpriteSheet[8][1], 32, 32, debug));
+		blocks.add(blockWallLeft = new BlockBrick("Brick Wall Left", this.blocks.size(), textureManager.dungeonSpriteSheet[8][0], 32, 32, debug));
+		blocks.add(blockWallEndLeft = new BlockBrick("Brick Wall End Left", this.blocks.size(), textureManager.dungeonSpriteSheet[9][0], 32, 32, debug));
+		blocks.add(blockWallEndRight = new BlockBrick("Brick Wall End Right", this.blocks.size(), textureManager.dungeonSpriteSheet[9][1], 32, 32, debug));
+		blocks.add(blockWallCornerTopLeft = new BlockBrick("Brick Wall Corner Top Left", this.blocks.size(), textureManager.dungeonSpriteSheet[7][2], 32, 32, debug));
 	}
 	/**
 	 * 

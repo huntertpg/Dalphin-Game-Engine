@@ -24,7 +24,6 @@ import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.player.TestPlayer;
 import com.dalphin.engine.render.Basic2DRenderer;
 import com.dalphin.engine.util.KeyboardInputHandler;
-import com.dalphin.engine.world.WorldGen;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -124,6 +123,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 
 		// This tells the sprite batch to dispose everything(such as the camera and
 		// such)
+		renderer.writer.writeWorld();
 		renderer.batch.dispose();
 		// this tells the texture manager to dispose all of its textures from memory
 		assetManager.dispose();

@@ -23,8 +23,8 @@ import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.util.RandomUtil;
 import com.dalphin.engine.world.TestWorld;
 import com.dalphin.engine.world.WorldDef;
-import com.dalphin.engine.world.WorldGen;
 import com.dalphin.engine.world.WorldParser;
+import com.dalphin.engine.world.WorldWriter;
 
 import box2dLight.RayHandler;
 
@@ -63,6 +63,8 @@ public class Basic2DRenderer {
 	
 	TestWorld testWorld;
 	WorldParser worldParser;
+	
+	public WorldWriter writer;
 
 	// create the basic 2d renderer from constructor that takes in a sprite batch
 	// and a texture manager
@@ -111,7 +113,9 @@ public class Basic2DRenderer {
 		testWorld.setCamera(getCamera());
 		player.createBody(testWorld.getWorld(), BodyType.DynamicBody);
 		testWorld.getPlayers().add(player);
-		worldParser = new WorldParser(testWorld, "Test World");
+		worldParser = new WorldParser(testWorld, "Test Write");
+		worldParser.parseWorld();
+		writer = new WorldWriter("Test Write", testWorld);
 	}
 
 	// get the camera from this class
@@ -136,7 +140,7 @@ public class Basic2DRenderer {
 		playerMovement.update(Gdx.graphics.getDeltaTime());
 		player.draw(batch, elapsedTime);
 		testWorld.renderWorld(batch, elapsedTime);
-		//debugRender.render(testWorld.getWorld(), camera.combined);
+		debugRender.render(testWorld.getWorld(), camera.combined);
 		batch.end();
 	}
 }

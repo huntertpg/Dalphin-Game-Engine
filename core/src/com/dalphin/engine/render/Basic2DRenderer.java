@@ -17,16 +17,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dalphin.engine.debug.DebugUtil;
+import com.dalphin.engine.item.Item2D;
+import com.dalphin.engine.item.ItemAxe;
 import com.dalphin.engine.managers.AssetManager;
 import com.dalphin.engine.player.Player2D;
 import com.dalphin.engine.player.Player2DMovement;
 import com.dalphin.engine.util.RandomUtil;
 import com.dalphin.engine.world.TestWorld;
-import com.dalphin.engine.world.WorldDef;
-import com.dalphin.engine.world.WorldGen;
 import com.dalphin.engine.world.WorldParser;
-
-import box2dLight.RayHandler;
 
 public class Basic2DRenderer {
 
@@ -63,7 +61,7 @@ public class Basic2DRenderer {
 	
 	TestWorld testWorld;
 	WorldParser worldParser;
-
+	
 	// create the basic 2d renderer from constructor that takes in a sprite batch
 	// and a texture manager
 	public Basic2DRenderer(AssetManager assetManager) {
@@ -93,7 +91,7 @@ public class Basic2DRenderer {
 		// set the viewport for the camera to the passed in values
 		this.viewPortWidth = viewPortWidth;
 		this.viewPortHeight = viewPortHeight;
-
+		
 
 	}
 
@@ -112,6 +110,11 @@ public class Basic2DRenderer {
 		player.createBody(testWorld.getWorld(), BodyType.DynamicBody);
 		testWorld.getPlayers().add(player);
 		worldParser = new WorldParser(testWorld, "Test World");
+		testWorld.getItems().add(assetManager.itemManager().axe);
+		assetManager.itemManager().axe.createBody(testWorld.getWorld(), BodyType.DynamicBody);
+		assetManager.itemManager().axe.canRotate(true);
+		assetManager.itemManager().axe.setItemHeight(assetManager.itemManager().axe.getItemHeight() * 2);
+		assetManager.itemManager().axe.setItemWidth(assetManager.itemManager().axe.getItemWidth() * 2);
 	}
 
 	// get the camera from this class

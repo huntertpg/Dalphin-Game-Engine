@@ -34,7 +34,7 @@ public class BlockManager {
 		blocks.add(blockWallCornerTopLeft = new BlockBrick("Brick Wall Corner Top Left", textureManager.dungeonSpriteSheet[7][2], 32, 32, debug));
 	}
 	/**
-	 * 
+	 *  
 	 * @param index
 	 * @return block
 	 */

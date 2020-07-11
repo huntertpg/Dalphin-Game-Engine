@@ -144,6 +144,9 @@ public class WorldDef {
 	}
 	
 	public void dispose() {
+		
+		
+		
 		if(rayHandler != null) {
 			rayHandler.dispose();
 		}

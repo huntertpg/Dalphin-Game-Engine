@@ -13,8 +13,8 @@ public class BlockBrick extends Block2D{
 	 * @param blockHeight
 	 * @param debugUtil
 	 */
-	public BlockBrick(String name, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debugUtil) {
-		super(name, texture, blockWidth, blockHeight, debugUtil);
+	public BlockBrick(String name, int blockID, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debugUtil) {
+		super(name, blockID, texture, blockWidth, blockHeight, debugUtil);
 	}
 	/**
 	 * 
@@ -30,6 +30,6 @@ public class BlockBrick extends Block2D{
 	 */
 	@Override
 	public BlockBrick createBlock() {
-		return new BlockBrick(this.getName(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
+		return new BlockBrick(this.getName(), this.getBlockID(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
 	}
 }

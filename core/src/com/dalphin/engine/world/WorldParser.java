@@ -20,12 +20,15 @@ public class WorldParser {
 		this.worldDirectory = worldDirectory;
 		this.worldDef = worldDef;
 		
-		parseBlocks();
-		parseLights();
-		worldDef.getRayHandler().setAmbientLight(0.3f);
+		worldDef.getRayHandler().setAmbientLight(1f);
 		if(worldDef.getRayHandler() != null) {
 			//parseLightProfile();
 		}
+	}
+	
+	public void parseWorld() {
+		parseBlocks();
+		parseLights();
 	}
 	
 	private void parseLightProfile() {
@@ -60,9 +63,9 @@ public class WorldParser {
 			}
 		}
 		
-		String[] blocks = blockWorldDat.split(":B |:X |:Y |:P |:BT |:R");
+		String[] blocks = blockWorldDat.split(":B |:X |:Y |:P |:BT |:R |:RV");
 		int index = 0;
-		for(int i = 0; i < blocks.length; i+=6) {
+		for(int i = 0; i < blocks.length; i+=7) {
 			worldDef.getWorldBlocks().add(worldDef.getBlockManager()
 					.getBlock(Integer.parseInt(blocks[i])).createBlock());
 			worldDef.getWorldBlocks().get(index).setPos(new Vector2(Float.parseFloat(blocks[i+1]), Float.parseFloat(blocks[i+2])));
@@ -77,6 +80,7 @@ public class WorldParser {
 			}
 			if(blocks[i+5].equals("t") | blocks[i+3].equals("T")){
 				worldDef.getWorldBlocks().get(index).canRotate(true);
+				worldDef.getWorldBlocks().get(index).setRotation(Float.parseFloat(blocks[i+6]));
 			}
 			index++;
 		}
@@ -106,7 +110,7 @@ public class WorldParser {
 				worldDef.getLights().add(new PointLight(worldDef.getRayHandler(), Integer.parseInt(lights[i+1]), 
 						new Color(Float.parseFloat(lights[i+2]), Float.parseFloat(lights[i+3]), 
 								Float.parseFloat(lights[i+4]), Float.parseFloat(lights[i + 5])),
-						Integer.parseInt(lights[i+6]), Integer.parseInt(lights[i+7]), Integer.parseInt(lights[i+8])));
+						Float.parseFloat(lights[i+6]), Float.parseFloat(lights[i+7]), Float.parseFloat(lights[i+8])));
 			}
 		}
 	}

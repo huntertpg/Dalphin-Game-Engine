@@ -23,7 +23,7 @@ import com.dalphin.engine.loaders.TextureLoader;
 public class Block2D {
 	private int blockHeight = 32;
 	private int blockWidth = 32;
-	private float density = 1f*((blockHeight/32)*(blockWidth/32));
+	private float density = 1f * ((blockHeight / 32) * (blockWidth / 32));
 	private DebugUtil debugUtil;
 	private String name;
 	private Vector2 pos;
@@ -36,24 +36,28 @@ public class Block2D {
 	private Fixture fixture;
 	private boolean physicsBody = false;
 	private boolean rotateBlock = false;
-	
+	private float rotation = 0;
+	private int blockID;
+
 	/**
 	 * 
 	 * @param name
 	 * @param path
 	 * @param debug
 	 */
-	public Block2D(String name, String path, DebugUtil debug) {
+	public Block2D(String name, int blockID, String path, DebugUtil debug) {
 		debugUtil = new DebugUtil();
 		this.pos = new Vector2();
-		
+		this.blockID = blockID;
+
 		this.texture = textureLoader.loadTexture(path);
 		this.name = name;
 		pos = new Vector2();
-		if(debug.isEnabled()) {
+		if (debug.isEnabled()) {
 			debug.printAssetLoading(this);
 		}
 	}
+
 	/**
 	 * 
 	 * @param name
@@ -62,36 +66,38 @@ public class Block2D {
 	 * @param blockHeight
 	 * @param debug
 	 */
-	public Block2D(String name, String path, int blockWidth, int blockHeight, DebugUtil debug) {
+	public Block2D(String name, int blockID, String path, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
 		this.pos = new Vector2();
-		
+		this.blockID = blockID;
 		this.texture = textureLoader.loadTexture(path);
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		this.name = name;
 		pos = new Vector2();
-		if(debug.isEnabled()) {
+		if (debug.isEnabled()) {
 			debug.printAssetLoading(this);
 		}
 	}
+
 	/**
 	 * 
 	 * @param name
 	 * @param texture
 	 * @param debug
 	 */
-	public Block2D(String name, Texture texture, DebugUtil debug) {
+	public Block2D(String name,int blockID, Texture texture, DebugUtil debug) {
 		debugUtil = new DebugUtil();
 		this.pos = new Vector2();
-
+		this.blockID = blockID;
 		this.texture = texture;
 		this.name = name;
 		pos = new Vector2();
-		if(debug.isEnabled()) {
+		if (debug.isEnabled()) {
 			debug.printAssetLoading(this);
 		}
 	}
+
 	/**
 	 * 
 	 * @param name
@@ -100,36 +106,38 @@ public class Block2D {
 	 * @param blockHeight
 	 * @param debug
 	 */
-	public Block2D(String name, Texture texture, int blockWidth, int blockHeight, DebugUtil debug) {
+	public Block2D(String name, int blockID, Texture texture, int blockWidth, int blockHeight, DebugUtil debug) {
 		debugUtil = new DebugUtil();
 		this.pos = new Vector2();
-		
+		this.blockID = blockID;
 		this.name = name;
 		this.texture = texture;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		pos = new Vector2();
-		if(debug.isEnabled()) {
+		if (debug.isEnabled()) {
 			debug.printAssetLoading(this);
 		}
 	}
-	/**
-	 * 
-	 * @param name
-	 * @param texture
-	 * @param debug
-	 */
-	public Block2D(String name, TextureRegion texture, DebugUtil debug) {
-		debugUtil = new DebugUtil();
-		this.pos = new Vector2();
 
+	/**
+	 * 
+	 * @param name
+	 * @param texture
+	 * @param debug
+	 */
+	public Block2D(String name, int blockID, TextureRegion texture, DebugUtil debug) {
+		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		this.blockID = blockID;
 		this.textureRegion = texture;
 		this.name = name;
 		pos = new Vector2();
-		if(debug.isEnabled()) {
+		if (debug.isEnabled()) {
 			debug.printAssetLoading(this);
 		}
 	}
+
 	/**
 	 * 
 	 * @param name
@@ -137,86 +145,97 @@ public class Block2D {
 	 * @param blockWidth
 	 * @param blockHeight
 	 */
-	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight) {
+	public Block2D(String name, int blockID, TextureRegion texture, int blockWidth, int blockHeight) {
 		debugUtil = new DebugUtil();
 		this.pos = new Vector2();
-		
-		this.textureRegion = texture;
-		this.name = name;
-		this.blockWidth = blockWidth;
-		this.blockHeight = blockHeight; 
-		pos = new Vector2();
-	}
-	/**
-	 * 
-	 * @param name
-	 * @param texture
-	 * @param blockWidth
-	 * @param blockHeight
-	 * @param debug
-	 */
-	public Block2D(String name, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debug) {
-		debugUtil = new DebugUtil();
-		this.pos = new Vector2();
-		
+		this.blockID = blockID;
 		this.textureRegion = texture;
 		this.name = name;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
 		pos = new Vector2();
-		if(debug.isEnabled()) {
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param texture
+	 * @param blockWidth
+	 * @param blockHeight
+	 * @param debug
+	 */
+	public Block2D(String name, int blockID, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debug) {
+		debugUtil = new DebugUtil();
+		this.pos = new Vector2();
+		this.blockID = blockID;
+		this.textureRegion = texture;
+		this.name = name;
+		this.blockWidth = blockWidth;
+		this.blockHeight = blockHeight;
+		pos = new Vector2();
+		if (debug.isEnabled()) {
 			debug.printAssetLoading(this);
 		}
 	}
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * @param batch
 	 */
 	public void draw(Batch batch) {
-		if(texture == null) {
-			if(physicsBody) {
-				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2), body.getPosition().y - (blockHeight / 2));
-				if(rotateBlock) {
-					batch.draw(textureRegion, pos.x, pos.y, this.blockWidth/2, this.blockHeight/2, blockWidth, blockHeight, 1, 1, body.getTransform().getRotation() * 57);
-				}else {
-					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+		if (texture == null) {
+			if (physicsBody) {
+				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2),
+						body.getPosition().y - (blockHeight / 2));
+				if (rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, this.blockWidth / 2, this.blockHeight / 2, blockWidth,
+							blockHeight, 1, 1, body.getTransform().getRotation() * 57);
+				} else {
+					// batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, rotation);
 				}
-			}else {
-				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
-			}
-				
-		}else if(texture != null){
-			if(physicsBody) {
-				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2), body.getPosition().y - (blockHeight / 2));
-				if(rotateBlock) {
-					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, body.getTransform().getRotation());
+			} else {
+				if (rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1, rotation);
 
-				}else {
-					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);	
+				} else {
+					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
 				}
-			}else {
+
+			}
+
+		} else if (texture != null) {
+			if (physicsBody) {
+				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2),
+						body.getPosition().y - (blockHeight / 2));
+				if (rotateBlock) {
+					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1,
+							body.getTransform().getRotation());
+
+				} else {
+					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+				}
+			} else {
 				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
 			}
 		}
-		
+
 	}
+
 	/**
 	 * 
 	 * @param batch
 	 * @param scale
 	 */
 	public void draw(Batch batch, float scale) {
-		if(texture == null) {
-			batch.draw(textureRegion, pos.x, pos.y, blockWidth * scale, blockHeight * scale);	
-		}else {
+		if (texture == null) {
+			batch.draw(textureRegion, pos.x, pos.y, blockWidth * scale, blockHeight * scale);
+		} else {
 			batch.draw(texture, pos.x, pos.y);
 		}
-		
+
 	}
+
 	/**
 	 * 
 	 * @return blockHeight
@@ -224,6 +243,7 @@ public class Block2D {
 	public int getBlockHeight() {
 		return blockHeight;
 	}
+
 	/**
 	 * 
 	 * @return blockWidth
@@ -231,6 +251,7 @@ public class Block2D {
 	public int getBlockWidth() {
 		return blockWidth;
 	}
+
 	/**
 	 * 
 	 * @return name
@@ -238,6 +259,7 @@ public class Block2D {
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * 
 	 * @return pos
@@ -245,6 +267,7 @@ public class Block2D {
 	public Vector2 getPos() {
 		return this.pos;
 	}
+
 	/**
 	 * 
 	 * @return texture
@@ -252,6 +275,7 @@ public class Block2D {
 	public Texture getTexture() {
 		return texture;
 	}
+
 	/**
 	 * 
 	 * @return textureRegion
@@ -259,6 +283,7 @@ public class Block2D {
 	public TextureRegion getTextureRegion() {
 		return textureRegion;
 	}
+
 	/**
 	 * 
 	 * @return pos.x
@@ -266,6 +291,7 @@ public class Block2D {
 	public float getxPos() {
 		return pos.x;
 	}
+
 	/**
 	 * 
 	 * @return pos.y
@@ -273,9 +299,11 @@ public class Block2D {
 	public float getyPos() {
 		return pos.y;
 	}
+
 	public Body getBody() {
 		return this.body;
 	}
+
 	/**
 	 * 
 	 * @param blockHeight
@@ -283,6 +311,7 @@ public class Block2D {
 	public void setBlockHeight(int blockHeight) {
 		this.blockHeight = blockHeight;
 	}
+
 	/**
 	 * 
 	 * @param blockWidth
@@ -290,6 +319,7 @@ public class Block2D {
 	public void setBlockWidth(int blockWidth) {
 		this.blockWidth = blockWidth;
 	}
+
 	/**
 	 * 
 	 * @param name
@@ -297,6 +327,7 @@ public class Block2D {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * 
 	 * @param pos
@@ -304,6 +335,7 @@ public class Block2D {
 	public void setPos(Vector2 pos) {
 		this.pos = pos;
 	}
+
 	/**
 	 * 
 	 * @param texture
@@ -311,6 +343,7 @@ public class Block2D {
 	public void setTexture(Texture texture) {
 		this.texture = texture;
 	}
+
 	/**
 	 * 
 	 * @param textureRegion
@@ -326,6 +359,7 @@ public class Block2D {
 	public void setxPos(float xPos) {
 		this.pos.x = xPos;
 	}
+
 	/**
 	 * 
 	 * @param yPos
@@ -333,17 +367,20 @@ public class Block2D {
 	public void setyPos(float yPos) {
 		this.pos.y = yPos;
 	}
-	
+
 	/**
-	 * This is the update method for the block - probably doesn't need to be updated 
+	 * This is the update method for the block - probably doesn't need to be updated
 	 */
 	public void update() {
-		
+
 	}
-	
+
 	/**
-	 * This function creates the physical body of the block. This is for floors and other tiles that don't need physical reaction (this
-	 * is optional for right now but layered rendering might be a thing later on so light doesn't get blocked by the floor).
+	 * This function creates the physical body of the block. This is for floors and
+	 * other tiles that don't need physical reaction (this is optional for right now
+	 * but layered rendering might be a thing later on so light doesn't get blocked
+	 * by the floor).
+	 * 
 	 * @param world
 	 * @param bodyType
 	 */
@@ -353,7 +390,7 @@ public class Block2D {
 		bodyDef.position.set(this.pos.x + (blockWidth / 2), this.pos.y + (blockHeight / 2));
 		this.body = world.createBody(bodyDef);
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(blockWidth/2, blockHeight/2);
+		shape.setAsBox(blockWidth / 2, blockHeight / 2);
 		fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = density;
@@ -361,30 +398,58 @@ public class Block2D {
 		shape.dispose();
 		physicsBody = true;
 	}
-	
+
 	/**
-	 * This is method that simply sets the block to rotate to the physical body of the block.
+	 * This is method that simply sets the block to rotate to the physical body of
+	 * the block.
+	 * 
 	 * @param rotate
 	 */
 	public void canRotate(boolean rotate) {
 		this.rotateBlock = rotate;
 	}
 	
+	public boolean getCanRotate() {
+		return this.rotateBlock;
+	}
+
 	/**
 	 * This method returns a new block. This is mainly for world gen right now.
+	 * 
 	 * @return Block2D
 	 */
 	public Block2D createBlock() {
-		return new Block2D(this.getName(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
+		return new Block2D(this.getName(), this.blockID, this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(),
+				this.getDebug());
 	}
-	
+
 	/**
 	 * This gets the debugUtil for the class
+	 * 
 	 * @return debugUtil
 	 */
 	public DebugUtil getDebug() {
 		return this.debugUtil;
 	}
+
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+		if (body != null) {
+			body.setTransform(body.getTransform().getPosition(), rotation);
+		}
+	}
 	
+	public float getRotation() {
+		if(body != null) {
+			return this.body.getTransform().getRotation();
+		}else {
+			return this.rotation;	
+		}
+		
+	}
 	
+	public int getBlockID() {
+		return this.blockID;
+	}
+
 }

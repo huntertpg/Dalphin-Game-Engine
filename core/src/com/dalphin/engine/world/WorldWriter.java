@@ -1,6 +1,5 @@
 package com.dalphin.engine.world;
 
-public class WorldWriter {
 
 import java.io.BufferedWriter;
 import java.io.File;

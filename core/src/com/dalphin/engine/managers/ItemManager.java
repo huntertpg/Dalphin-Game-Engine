@@ -17,7 +17,9 @@ public class ItemManager {
 	 */
 	public ItemManager(TextureManager textureManager, DebugUtil debug) {
 		this.debug = debug;
-		axe = new ItemAxe("Axe", textureManager.dungeonSpriteSheet[3][18], 0, -4, 0, 20, debug);
+		axe = new ItemAxe("Axe", textureManager.dungeonSpriteSheet[6][21], 0, -7, 5, 8, debug);
+		axe.setItemHeight(32);
+		axe.setItemWidth(32);
 	}
 
 }

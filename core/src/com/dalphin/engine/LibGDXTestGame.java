@@ -12,7 +12,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dalphin.engine.block.Block2D;
@@ -30,13 +32,11 @@ import box2dLight.RayHandler;
 
 public class LibGDXTestGame extends ApplicationAdapter {
 
-	AssetManager assetManager;
+	public AssetManager assetManager;
 	Box2DDebugRenderer debugRender;
 
 	// Create a sprite batch for rendering - this method will be moved to the
 	// renderers later on
-	SpriteBatch batch;
-
 	DebugUtil debugUtil;
 
 	float elapsedTime;
@@ -51,19 +51,12 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	// that contains a player texture, move speed, etc...
 	Player2D player;
 
-	// this is the player movement class that takes in the input manager and
-	// modifies the players data based on that
-
-	int pos = 0;
-
 	// This is the main renderer for 2D rendering. It contains the orthographic
 	// camera and will be
 	// in charge of rendering for now.
 	Basic2DRenderer renderer;
-	PointLight light;
 	Player2DMovement playerMovement;
-	RayHandler ray;
-
+	public boolean isStarted = false;
 	/**
 	 * This is the create method. This is basically where all the initialization is
 	 * done to get assets loaded up, input managers set, and the initialization of
@@ -76,13 +69,14 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		debugUtil = new DebugUtil();
 		debugUtil.enableDebugging(true);
 		debugUtil.Debug();
-		assetManager = new AssetManager(debugUtil);
+		assetManager = new AssetManager();
 		assetManager.InitManagers();
 		debugRender = new Box2DDebugRenderer(true, false, false, false, false, false);
+		
 		// init the renderer that creates the camera and will eventually be used for all
 		// basic
 		// 2D rendering
-		renderer = new Basic2DRenderer(assetManager, 1280, 720, debugUtil);
+		renderer = new Basic2DRenderer(assetManager, 1920, 1080, debugUtil);
 
 		// init the input handler for keyboard input
 		input = new KeyboardInputHandler();
@@ -92,27 +86,12 @@ public class LibGDXTestGame extends ApplicationAdapter {
 
 		player = new TestPlayer(assetManager.animationManager(), "Test", 100);
 		playerMovement = new Player2DMovement(player, input, renderer.batch, assetManager.animationManager());
-		
-		// set the default input processor to the keyboard input manager - this needs to
-		// be done or else
-		// input from the input manager will not work
-
-
 		 
 		renderer.playerMovement = playerMovement;
-		//player.createBody(renderer.world.world, BodyType.DynamicBody);
 		renderer.player = player;
 		renderer.create();
-		//ray = new RayHandler(renderer.world.world);
-		//ray.setAmbientLight(.3f);
-		//light = new PointLight(ray, 500, new Color(0.4f, 0.2f, 0.1f, 1f), 600, 200, -64);
-		// light = new PointLight(ray, 500, new Color(0.4f, 0.2f, 0.1f,1f), 200, 600,
-		// -64);
+		this.isStarted = true;
 	}
-
-	// this method isn't require but is called every render cycle to check for user
-	// input and to see if anything
-	// data wise has changed and if so it is modified
 
 	/**
 	 * This is required as it disposes of all things that were loaded into memory
@@ -149,18 +128,6 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		// called every render cycle
 		renderer.render();
 		elapsedTime += Gdx.graphics.getDeltaTime();
-		//ray.setCombinedMatrix(renderer.getCamera());
-		// This tells the sprite batch to begin another batch to render - all rendering
-		// is done between this and .end();
-
-		// this draws the player to the screen by obtaining the players texture from the
-		// player object, getting the players current
-		// at the current players x and y position
-		// this ends the drawing of things to the screen
-		//debugRender.render(renderer.world.world, renderer.getCamera().combined);
-
-		//ray.updateAndRender();
-
 		// this method checks for any updates that may occur (such as player input and
 		// modifcation to the player position)
 		update();
@@ -172,5 +139,7 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	 */
 	public void update() {
 		player.update();
+		renderer.update();
 	}
+	
 }

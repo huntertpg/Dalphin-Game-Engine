@@ -20,7 +20,7 @@ public class WorldParser {
 		this.worldDirectory = worldDirectory;
 		this.worldDef = worldDef;
 		
-		worldDef.getRayHandler().setAmbientLight(1f);
+		worldDef.getRayHandler().setAmbientLight(0.5f);
 		if(worldDef.getRayHandler() != null) {
 			//parseLightProfile();
 		}

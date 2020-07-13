@@ -10,6 +10,7 @@ public class Player2DMovement {
 	private KeyboardInputHandler keyboardInputHandler;
 	private Player2D player;
 	private float elapsedTime;
+	private float moveSpeed = 100;
 	/**
 	 * 
 	 * @param keyboardInputHandler
@@ -30,25 +31,25 @@ public class Player2DMovement {
 	public void update(float deltaTime) {
 		elapsedTime += deltaTime;
 		if(keyboardInputHandler.isUp()) {
-			player.setYMoveSpeed(2);
+			player.setYMoveSpeed(moveSpeed * deltaTime);
 			if(player.getBody() != null) {
 				player.getBody().applyForceToCenter(new Vector2(0, 1), true);	
 			}
 			player.setPlayerY(player.getPlayerY() + player.getYMoveSpeed());
 		} else if(keyboardInputHandler.isDown()) {
-			player.setYMoveSpeed(-2);
+			player.setYMoveSpeed(-moveSpeed * deltaTime);
 			if(player.getBody() != null) {
 				player.getBody().applyForceToCenter(new Vector2(0, -1), true);	
 			}
 			player.setPlayerY(player.getPlayerY() + player.getYMoveSpeed());
 		} else if(keyboardInputHandler.isLeft()) {
-			player.setXMoveSpeed(-2);
+			player.setXMoveSpeed(-moveSpeed * deltaTime);
 			if(player.getBody() != null) {
 				player.getBody().applyForceToCenter(new Vector2(-1, 0), true);	
 			}
 			player.setPlayerX(player.getPlayerX() + player.getXMoveSpeed());
 		} else if(keyboardInputHandler.isRight()) {
-			player.setXMoveSpeed(2);
+			player.setXMoveSpeed(moveSpeed * deltaTime);
 			if(player.getBody() != null) {
 				player.getBody().applyForceToCenter(new Vector2(1, 0), true);	
 			}

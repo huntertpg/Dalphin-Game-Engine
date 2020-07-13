@@ -50,8 +50,6 @@ public class Basic2DRenderer {
 	public SpriteBatch batch;
 	private AssetManager assetManager;
 
-	// declare the texture manager(passed in by the main class)
-
 	// declare the random util for random numbers
 	private RandomUtil randomUtil;
 
@@ -61,7 +59,7 @@ public class Basic2DRenderer {
 	public Player2D player;
 	float elapsedTime = 0;
 	
-	TestWorld testWorld;
+	public TestWorld testWorld;
 	WorldParser worldParser;
 	
 	public WorldWriter writer;
@@ -105,8 +103,6 @@ public class Basic2DRenderer {
 		// create the camera using the passed in viewport values
 		camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
 		batch.setProjectionMatrix(camera.combined);
-		//world = new WorldGen(assetManager.blockManager(), debugUtil);
-		//world.genorateWorld();
 		debugRender = new Box2DDebugRenderer(true, false, false, false, false, true);
 		testWorld = new TestWorld(assetManager.blockManager(), new Vector2(0, 0f));
 		testWorld.genWorld(debugUtil);
@@ -114,11 +110,6 @@ public class Basic2DRenderer {
 		player.createBody(testWorld.getWorld(), BodyType.DynamicBody);
 		testWorld.getPlayers().add(player);
 		worldParser = new WorldParser(testWorld, "Test World");
-		testWorld.getItems().add(assetManager.itemManager().axe);
-		assetManager.itemManager().axe.createBody(testWorld.getWorld(), BodyType.DynamicBody);
-		assetManager.itemManager().axe.canRotate(true);
-		assetManager.itemManager().axe.setItemHeight(assetManager.itemManager().axe.getItemHeight() * 2);
-		assetManager.itemManager().axe.setItemWidth(assetManager.itemManager().axe.getItemWidth() * 2);
 		worldParser = new WorldParser(testWorld, "Test Write");
 		worldParser.parseWorld();
 		writer = new WorldWriter("Test Write", testWorld);
@@ -137,11 +128,9 @@ public class Basic2DRenderer {
 	// rendering functions in other classes such as
 	// the world renderer to render things to the screen
 	public void render() {
-		batch.setProjectionMatrix(camera.combined);
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		camera.update();
 		batch.begin();
-		//world.drawWorld(batch, elapsedTime);
 		
 		playerMovement.update(Gdx.graphics.getDeltaTime());
 		player.draw(batch, elapsedTime);

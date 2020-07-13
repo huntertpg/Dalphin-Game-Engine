@@ -273,7 +273,14 @@ public class Block2D {
 	 * @return texture
 	 */
 	public Texture getTexture() {
-		return texture;
+		if(texture != null) {
+			return texture;	
+		}else if(textureRegion != null) {
+			return textureRegion.getTexture();
+		}else {
+			return null;
+		}
+		
 	}
 
 	/**
@@ -451,5 +458,6 @@ public class Block2D {
 	public int getBlockID() {
 		return this.blockID;
 	}
+	
 
 }

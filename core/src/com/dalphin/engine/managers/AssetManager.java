@@ -7,6 +7,7 @@
 
 package com.dalphin.engine.managers;
 
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.dalphin.engine.debug.DebugUtil;
 
 public class AssetManager {
@@ -16,22 +17,25 @@ public class AssetManager {
 	private BlockManager blockManager;
 	private AnimationManager animationManager;
 	private DebugUtil debug;
+	private String blockTexturePaths;
 	/**
-	 * 
-	 * @param debug
 	 */
-	public AssetManager(DebugUtil debug) {
-		this.debug = debug;
+	public AssetManager() {
+		this.debug = new DebugUtil();
+		debug.enableDebugging(true);
+		debug.Debug();
 	}
 	/**
 	 * 
 	 */
 	public void InitManagers() {
+
 		textureManager = new TextureManager(debug);
 		textureManager.loadAllTextures();
 		itemManager = new ItemManager(textureManager, debug);
 		blockManager = new BlockManager(textureManager, debug);
 		animationManager = new AnimationManager(textureManager);
+		
 	}
 	/**
 	 * 
@@ -67,5 +71,6 @@ public class AssetManager {
 	public AnimationManager animationManager() {
 		return this.animationManager;
 	}
+	
 
 }

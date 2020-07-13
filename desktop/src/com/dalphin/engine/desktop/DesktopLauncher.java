@@ -15,6 +15,8 @@ public class DesktopLauncher {
 		
 		//Create new LWGGL App config and call the Main core game file or rather just start the game
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.height = 720;
+		config.width = 1280;
 		new LwjglApplication(new LibGDXTestGame(), config);
 	}
 }

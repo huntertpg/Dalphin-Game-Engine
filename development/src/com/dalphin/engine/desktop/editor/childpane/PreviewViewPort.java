@@ -1,14 +1,17 @@
-package com.dalphin.engine.desktop.editor;
+package com.dalphin.engine.desktop.editor.childpane;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.dalphin.engine.LibGDXTestGame;
+import com.dalphin.engine.desktop.editor.components.DalphinButton;
 
 public class PreviewViewPort {
 	
@@ -19,6 +22,9 @@ public class PreviewViewPort {
 	private JPanel panel;
 	private LibGDXTestGame game;
 	LwjglAWTCanvas canvas;
+	private JToolBar toolBar;
+	private DalphinButton pause;
+	private DalphinButton play;
 	
 	public PreviewViewPort() {
 		config = new LwjglApplicationConfiguration();
@@ -29,6 +35,7 @@ public class PreviewViewPort {
 	public PreviewViewPort(int width, int height) {
 		config = new LwjglApplicationConfiguration();
 		game = new LibGDXTestGame();
+
 		appListener = game;
 		this.width = width;
 		this.height = height;
@@ -46,7 +53,24 @@ public class PreviewViewPort {
 		canvas = new LwjglAWTCanvas(this.appListener);
 		canvas.getCanvas().setSize(width, height);
 		panel = new JPanel();
-		panel.add(canvas.getCanvas(), BorderLayout.CENTER);
+		pause = new DalphinButton("Pause");
+		play = new DalphinButton("Play");
+		toolBar = new JToolBar();
+		toolBar.setFloatable(false);
+		toolBar.add(pause);
+		toolBar.add(play);
+		panel.add(toolBar, BorderLayout.NORTH);
+		panel.add(canvas.getCanvas(), BorderLayout.SOUTH);
+		
+		
+		pause.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		
 	}
 	
 	public JPanel getPanel() {

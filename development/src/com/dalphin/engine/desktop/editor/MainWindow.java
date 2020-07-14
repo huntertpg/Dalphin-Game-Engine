@@ -1,6 +1,7 @@
 package com.dalphin.engine.desktop.editor;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -8,6 +9,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import com.dalphin.engine.desktop.editor.componentadapter.MainCA;
+import com.dalphin.engine.desktop.editor.parentpane.AssetsTabbedPane;
+import com.dalphin.engine.desktop.editor.parentpane.GameTabbedPane;
 
 public class MainWindow {
 	private JFrame frame;
@@ -45,6 +50,7 @@ public class MainWindow {
 		};
 		frame = new JFrame();
 		frame.setSize(1280, 720);
+		frame.setMinimumSize(new Dimension(480, 270));
 		frame.addWindowListener(listener);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		try {

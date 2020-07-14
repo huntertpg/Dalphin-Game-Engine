@@ -1,4 +1,4 @@
-package com.dalphin.engine.desktop.editor;
+package com.dalphin.engine.desktop.editor.childpane;
 
 
 import java.awt.Dimension;
@@ -11,16 +11,15 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
+import com.dalphin.engine.desktop.editor.EditorTheme;
+import com.dalphin.engine.desktop.editor.components.DalphinButton;
 import com.dalphin.engine.managers.AssetManager;
 
 
-public class BlockPane {
+public class ItemPane {
 	
 	private AssetManager assetManager;
 	private JPanel pane;
@@ -30,27 +29,27 @@ public class BlockPane {
 	private EditorTheme editorTheme;
 	private ArrayList<DalphinButton> buttons = new ArrayList<DalphinButton>();
 	
-	public BlockPane(AssetManager assetManager) {
+	public ItemPane(AssetManager assetManager) {
 		pane = new JPanel();
 		try {
-			for(int i = 0; i < assetManager.blockManager().blocks.size(); i++) {
-				String path = ((FileTextureData)assetManager.blockManager().getBlock(i).getTexture().getTextureData()).getFileHandle().path();
+			for(int i = 0; i < assetManager.itemManager().items.size(); i++) {
+				String path = ((FileTextureData)assetManager.itemManager().items.get(i).getTexture().getTextureData()).getFileHandle().path();
 				image = ImageIO.read(new File("../core/assets/" + path));
-				image = image.getSubimage(assetManager.blockManager().getBlock(i).getTextureRegion().getRegionX(), 
-						assetManager.blockManager().getBlock(i).getTextureRegion().getRegionY(), 
-						assetManager.blockManager().getBlock(i).getTextureRegion().getRegionWidth(), assetManager.blockManager().getBlock(i).getTextureRegion().getRegionHeight());
+				image = image.getSubimage(assetManager.itemManager().items.get(i).getTextureRegion().getRegionX(), 
+						assetManager.itemManager().items.get(i).getTextureRegion().getRegionY(), 
+						assetManager.itemManager().items.get(i).getTextureRegion().getRegionWidth(), assetManager.itemManager().items.get(i).getTextureRegion().getRegionHeight());
 				icon = image.getScaledInstance(image.getWidth() * 2, image.getHeight() * 2, Image.SCALE_DEFAULT);
 				if(editorTheme == null) {
-					button = new DalphinButton(assetManager.blockManager().getBlock(i).getName(),new ImageIcon(icon), null);
+					button = new DalphinButton(assetManager.itemManager().items.get(i).getName(),new ImageIcon(icon), null);
 					
 				}else {
-					button = new DalphinButton(assetManager.blockManager().getBlock(i).getName(),new ImageIcon(icon), editorTheme);	
+					button = new DalphinButton(assetManager.itemManager().items.get(i).getName(),new ImageIcon(icon), editorTheme);	
 					
 				}
 				button.setPreferredSize(new Dimension(100, 100));
 				button.setHorizontalTextPosition(JButton.CENTER);
 				button.setVerticalTextPosition(JButton.BOTTOM);
-				button.setToolTipText(assetManager.blockManager().getBlock(i).getName());
+				button.setToolTipText(assetManager.itemManager().items.get(i).getName());
 				buttons.add(button);
 				pane.add(button);
 

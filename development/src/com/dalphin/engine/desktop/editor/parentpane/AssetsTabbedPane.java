@@ -1,10 +1,13 @@
-package com.dalphin.engine.desktop.editor;
+package com.dalphin.engine.desktop.editor.parentpane;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import com.dalphin.engine.desktop.editor.EditorTheme;
+import com.dalphin.engine.desktop.editor.childpane.BlockPane;
+import com.dalphin.engine.desktop.editor.childpane.ItemPane;
 import com.dalphin.engine.managers.AssetManager;
 
 public class AssetsTabbedPane {

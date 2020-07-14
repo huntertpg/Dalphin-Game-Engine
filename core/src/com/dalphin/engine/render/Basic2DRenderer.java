@@ -135,7 +135,7 @@ public class Basic2DRenderer {
 		playerMovement.update(Gdx.graphics.getDeltaTime());
 		player.draw(batch, elapsedTime);
 		testWorld.renderWorld(batch, elapsedTime);
-		debugRender.render(testWorld.getWorld(), camera.combined);
+		//debugRender.render(testWorld.getWorld(), camera.combined);
 		batch.end();
 	}
 }

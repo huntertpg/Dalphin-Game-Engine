@@ -42,6 +42,7 @@ public class PreviewViewPort {
 	}
 	
 	public void create() {
+		game.editor = true;
 		canvas = new LwjglAWTCanvas(this.appListener);
 		canvas.getCanvas().setSize(width, height);
 		panel = new JPanel();

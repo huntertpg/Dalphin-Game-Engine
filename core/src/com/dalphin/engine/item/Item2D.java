@@ -147,7 +147,12 @@ public class Item2D {
 	 * @return texture
 	 */
 	public Texture getTexture() {
-		return texture;
+		if(texture != null) {
+			return texture;
+		}else {
+			return textureRegion.getTexture();
+		}
+		
 	}
 	/**
 	 * 
@@ -239,6 +244,10 @@ public class Item2D {
 	 */
 	public void canRotate(boolean rotate) {
 		this.rotateBlock = rotate;
+	}
+	
+	public TextureRegion getTextureRegion() {
+		return this.textureRegion;
 	}
 	
 }

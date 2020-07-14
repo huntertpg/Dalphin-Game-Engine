@@ -57,6 +57,9 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	Basic2DRenderer renderer;
 	Player2DMovement playerMovement;
 	public boolean isStarted = false;
+	public boolean exit = false;
+	public boolean disposed = false;
+	public boolean editor = false;
 	/**
 	 * This is the create method. This is basically where all the initialization is
 	 * done to get assets loaded up, input managers set, and the initialization of
@@ -103,9 +106,14 @@ public class LibGDXTestGame extends ApplicationAdapter {
 		// This tells the sprite batch to dispose everything(such as the camera and
 		// such)
 		renderer.writer.writeWorld();
-		renderer.batch.dispose();
+
+		disposed = true;
+		if(!editor) {
+			renderer.batch.dispose();
+			assetManager.dispose();
+		}
+
 		// this tells the texture manager to dispose all of its textures from memory
-		assetManager.dispose();
 	}
 
 	/**
@@ -138,6 +146,9 @@ public class LibGDXTestGame extends ApplicationAdapter {
 	 * input and to see if anything data wise has changed and if so it is modified
 	 */
 	public void update() {
+		if(exit) {
+			dispose();
+		}
 		player.update();
 		renderer.update();
 	}

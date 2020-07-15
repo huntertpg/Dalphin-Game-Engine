@@ -1,5 +1,6 @@
 package com.dalphin.engine.block;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dalphin.engine.debug.DebugUtil;
@@ -16,6 +17,10 @@ public class BlockBrick extends Block2D{
 	public BlockBrick(String name, int blockID, TextureRegion texture, int blockWidth, int blockHeight, DebugUtil debugUtil) {
 		super(name, blockID, texture, blockWidth, blockHeight, debugUtil);
 	}
+	public BlockBrick(String name, int blockID, Texture texture, int blockWidth, int blockHeight, DebugUtil debug) {
+		super(name, blockID, texture, blockWidth, blockHeight, debug);
+
+	}
 	/**
 	 * 
 	 * @param batch
@@ -30,6 +35,12 @@ public class BlockBrick extends Block2D{
 	 */
 	@Override
 	public BlockBrick createBlock() {
-		return new BlockBrick(this.getName(), this.getBlockID(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(), this.getDebug());
+		if(this.getTexture() == null) {
+			return new BlockBrick(this.getName(), this.getBlockID(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(),
+					this.getDebug());	
+		}else {
+			return new BlockBrick(this.getName(), this.getBlockID(), this.getTexture(), this.getBlockWidth(), this.getBlockHeight(),
+					this.getDebug());
+		}
 	}
 }

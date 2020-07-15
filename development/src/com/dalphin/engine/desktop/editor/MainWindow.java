@@ -65,6 +65,7 @@ public class MainWindow {
 
 		};
 		frame = new JFrame();
+		frame.setTitle("Dalphin Editor");
 		frame.setSize(1280, 720);
 		frame.setMinimumSize(new Dimension(480, 270));
 		frame.addWindowListener(listener);

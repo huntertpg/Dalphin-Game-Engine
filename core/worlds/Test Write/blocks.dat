@@ -1,44 +1,44 @@
-0:B 32.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-0:B 64.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-0:B 96.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-0:B 128.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-0:B 160.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-0:B 192.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-0:B 224.0:X 0.0:Y T:P S:BT T:R 0.0:RV
-1:B 32.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-1:B 64.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-1:B 96.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-1:B 128.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-1:B 160.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-1:B 192.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-1:B 224.0:X -32.0:Y F:P S:BT F:R 0.0:RV
-2:B 32.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 64.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 96.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 128.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 160.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 192.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 224.0:X -64.0:Y F:P S:BT F:R 0.0:RV
-2:B 32.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 64.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 96.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 128.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 160.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 192.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 224.0:X -96.0:Y F:P S:BT F:R 0.0:RV
-2:B 32.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 64.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 96.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 128.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 160.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 192.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 224.0:X -128.0:Y F:P S:BT F:R 0.0:RV
-2:B 153.42802:X -121.2668:Y T:P D:BT T:R -1.8014365:RV
-4:B 0.0:X -32.0:Y T:P S:BT T:R 0.0:RV
-3:B 32.0:X -32.0:Y T:P S:BT T:R 0.0:RV
-4:B 0.0:X -64.0:Y T:P S:BT T:R 0.0:RV
-3:B 32.0:X -64.0:Y T:P S:BT T:R 0.0:RV
-4:B 0.0:X -96.0:Y T:P S:BT T:R 0.0:RV
-3:B 32.0:X -96.0:Y T:P S:BT T:R 0.0:RV
-5:B 0.0:X -128.0:Y T:P S:BT T:R 0.0:RV
-6:B 32.0:X -128.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 32.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 64.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 96.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 128.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 160.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 192.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Top:B 224.0:X 0.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall:B 32.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Wall:B 64.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Wall:B 96.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Wall:B 128.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Wall:B 160.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Wall:B 192.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Wall:B 224.0:X -32.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 32.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 64.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 96.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 128.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 160.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 192.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 224.0:X -64.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 32.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 64.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 96.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 128.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 160.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 192.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 224.0:X -96.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 32.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 64.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 96.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 128.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 160.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 192.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 224.0:X -128.0:Y F:P S:BT F:R 0.0:RV
+Brick Floor:B 136.73463:X -143.56088:Y T:P D:BT T:R 0.66558075:RV
+Brick Wall Left:B 0.0:X -32.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall Right:B 32.0:X -32.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall Left:B 0.0:X -64.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall Right:B 32.0:X -64.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall Left:B 0.0:X -96.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall Right:B 32.0:X -96.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall End Left:B 0.0:X -128.0:Y T:P S:BT T:R 0.0:RV
+Brick Wall End Right:B 32.0:X -128.0:Y T:P S:BT T:R 0.0:RV

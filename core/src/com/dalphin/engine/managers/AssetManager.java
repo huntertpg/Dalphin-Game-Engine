@@ -36,7 +36,7 @@ public class AssetManager {
 		blockManager = new BlockManager(textureManager, debug);
 		animationManager = new AnimationManager(textureManager);
 		
-	}
+	} 
 	/**
 	 * 
 	 */
@@ -70,6 +70,10 @@ public class AssetManager {
 	 */
 	public AnimationManager animationManager() {
 		return this.animationManager;
+	}
+	
+	public DebugUtil getDebugUtil() {
+		return this.debug;
 	}
 	
 

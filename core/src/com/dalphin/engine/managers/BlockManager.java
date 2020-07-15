@@ -1,14 +1,19 @@
 package com.dalphin.engine.managers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.dalphin.engine.block.Block2D;
-import com.dalphin.engine.block.BlockBrick;
+import com.dalphin.engine.block.BlockReader;
 import com.dalphin.engine.debug.DebugUtil;
 
 public class BlockManager {
 	
 	public ArrayList<Block2D> blocks = new ArrayList<Block2D>();
+	private DebugUtil debug;
+	private BlockReader blockReader;
 	
 	/**
 	 * 
@@ -16,16 +21,10 @@ public class BlockManager {
 	 * @param debug
 	 */
 	public BlockManager(TextureManager textureManager, DebugUtil debug) {
-		blocks.add(new BlockBrick("Brick Top", this.blocks.size(), textureManager.dungeonSpriteSheet[0][1], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick", this.blocks.size(), textureManager.dungeonSpriteSheet[1][1], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick Floor", this.blocks.size(), textureManager.dungeonSpriteSheet[4][1], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick Wall Right", this.blocks.size(), textureManager.dungeonSpriteSheet[8][1], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick Wall Left", this.blocks.size(), textureManager.dungeonSpriteSheet[8][0], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick Wall End Left", this.blocks.size(), textureManager.dungeonSpriteSheet[9][0], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick Wall End Right", this.blocks.size(), textureManager.dungeonSpriteSheet[9][1], 32, 32, debug));
-		blocks.add(new BlockBrick("Brick Wall Corner Top Left", this.blocks.size(), textureManager.dungeonSpriteSheet[7][2], 32, 32, debug));
-		blocks.add(new BlockBrick("Flag Red Wall", this.blocks.size(), textureManager.dungeonSpriteSheet[2][1], 32, 32, debug));
-		blocks.add(new BlockBrick("Cracked Floor", this.blocks.size(), textureManager.dungeonSpriteSheet[4][2], 32, 32, debug));
+		this.debug = debug;
+		blockReader = new BlockReader(textureManager, this);
+		
+		readBlockManifest("BlockManifest");
 	}
 	/**
 	 *  
@@ -34,6 +33,38 @@ public class BlockManager {
 	 */
 	public Block2D getBlock(int index) {
 		return this.blocks.get(index);
+	}
+	
+	public Block2D getBlock(String name) {
+		Block2D block = null;
+		for(int i = 0; i < blocks.size(); i++) {
+			if(blocks.get(i).getName().equals(name)) {
+				block = this.blocks.get(i);
+			}
+		}
+		return block;
+	}	
+	
+	public int blockListSize() {
+		return this.blocks.size();
+	}
+	
+	public DebugUtil getDebug() {
+		return this.debug;
+	}
+	
+	public void readBlockManifest(String blockManifest) {
+		File blockManifestFile = new File("../core/assets/blocks/" + blockManifest + ".manifest");
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(blockManifestFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while(scanner.hasNextLine()) {
+			blocks.add(blockReader.readBlock(scanner.nextLine()));
+		}
 	}
 
 	

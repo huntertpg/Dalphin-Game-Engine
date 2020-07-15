@@ -1,0 +1,5 @@
+Name:Brick Wall Left:
+Texture:null:
+TextureRegion:textures/DunTile.png,8,0:
+Width:32:
+Height:32:

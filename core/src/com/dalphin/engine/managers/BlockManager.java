@@ -25,6 +25,7 @@ public class BlockManager {
 		blocks.add(new BlockBrick("Brick Wall End Right", this.blocks.size(), textureManager.dungeonSpriteSheet[9][1], 32, 32, debug));
 		blocks.add(new BlockBrick("Brick Wall Corner Top Left", this.blocks.size(), textureManager.dungeonSpriteSheet[7][2], 32, 32, debug));
 		blocks.add(new BlockBrick("Flag Red Wall", this.blocks.size(), textureManager.dungeonSpriteSheet[2][1], 32, 32, debug));
+		blocks.add(new BlockBrick("Cracked Floor", this.blocks.size(), textureManager.dungeonSpriteSheet[4][2], 32, 32, debug));
 	}
 	/**
 	 *  

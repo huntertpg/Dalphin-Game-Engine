@@ -12,7 +12,10 @@ public class EditorTheme {
 	private Color darkTheme = new Color(43,43,43);
 	private boolean enableDarkTheme = false;
 	private ArrayList<Object> objects = new ArrayList<Object>();
-	
+	/**
+	 * 
+	 * @param enableDarkTheme
+	 */
 	public EditorTheme(boolean enableDarkTheme) {
 		this.enableDarkTheme = enableDarkTheme;
 		if(enableDarkTheme) {
@@ -21,7 +24,10 @@ public class EditorTheme {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * @param enableDarkTheme
+	 */
 	public void setTheme(boolean enableDarkTheme) {
 		this.enableDarkTheme = enableDarkTheme;
 		if(enableDarkTheme) {
@@ -30,7 +36,10 @@ public class EditorTheme {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * @param comp
+	 */
 	public void setDarkTheme(Object comp) {
 		if(comp instanceof JFrame) {
 			((JFrame) comp).setBackground(darkTheme);
@@ -39,13 +48,19 @@ public class EditorTheme {
 			((JComponent) comp).setBackground(darkTheme);
 		}
 	}
-	
+	/**
+	 * 
+	 * @param comp
+	 */
 	public void setLightTheme(Object comp) {
 		if(comp instanceof JFrame) {
 			((JFrame) comp).setBackground(new Color(1,1,1));
 		}
 	}
-	
+	/**
+	 * 
+	 * @param o
+	 */
 	public void addObject(Object o) {
 		this.objects.add(o);
 	}

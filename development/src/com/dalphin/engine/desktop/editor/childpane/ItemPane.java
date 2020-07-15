@@ -28,7 +28,10 @@ public class ItemPane {
 	private DalphinButton button;
 	private EditorTheme editorTheme;
 	private ArrayList<DalphinButton> buttons = new ArrayList<DalphinButton>();
-	
+	/**
+	 * 
+	 * @param assetManager
+	 */
 	public ItemPane(AssetManager assetManager) {
 		pane = new JPanel();
 		try {
@@ -59,11 +62,17 @@ public class ItemPane {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public JPanel getPanel() {
 		return this.pane;
 	}
-	
+	/**
+	 * 
+	 * @param editorTheme
+	 */
 	public void setEditorTheme(EditorTheme editorTheme) {
 		this.editorTheme = editorTheme;
 		for(int i = 0; i < buttons.size(); i++) {

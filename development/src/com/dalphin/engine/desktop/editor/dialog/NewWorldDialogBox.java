@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.dalphin.engine.desktop.editor.childpane.MapEditorPane;
+import com.dalphin.engine.desktop.editor.childpane.MapPane;
+import com.dalphin.engine.desktop.editor.mapEditor.MapTabbedPane;
 import com.dalphin.engine.desktop.editor.childpane.MapPane;
 
 public class NewWorldDialogBox extends JDialog{
@@ -21,8 +22,8 @@ public class NewWorldDialogBox extends JDialog{
 	public JTextField worldName;
 	private JPanel worldPanel;
 	private JButton create;
-	private MapEditorPane mapEditorPane;
-	public NewWorldDialogBox(final MapEditorPane mapEditorPane) {
+	private MapTabbedPane mapEditorPane;
+	public NewWorldDialogBox(final MapTabbedPane mapEditorPane) {
 		this.mapEditorPane = mapEditorPane;
 		worldPanel = new JPanel();
 		worldNameLabel = new JLabel("World name:");
@@ -40,10 +41,7 @@ public class NewWorldDialogBox extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				MapPane map = new MapPane(mapEditorPane.getBlocks(), mapEditorPane.getPane().getWidth(), mapEditorPane.getPane().getHeight());
-				map.setMapName(worldName.getText());
-
-				mapEditorPane.getPane().addTab(worldName.getText(), map);
+				mapEditorPane.addMap(worldName.getText());
 				dispose();
 			}
 		});

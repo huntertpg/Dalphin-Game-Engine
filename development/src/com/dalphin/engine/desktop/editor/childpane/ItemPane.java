@@ -28,6 +28,8 @@ public class ItemPane {
 	private DalphinButton button;
 	private EditorTheme editorTheme;
 	private ArrayList<DalphinButton> buttons = new ArrayList<DalphinButton>();
+	private int activeButton;
+
 	/**
 	 * 
 	 * @param assetManager
@@ -43,10 +45,10 @@ public class ItemPane {
 						assetManager.itemManager().items.get(i).getTextureRegion().getRegionWidth(), assetManager.itemManager().items.get(i).getTextureRegion().getRegionHeight());
 				icon = image.getScaledInstance(image.getWidth() * 2, image.getHeight() * 2, Image.SCALE_DEFAULT);
 				if(editorTheme == null) {
-					button = new DalphinButton(assetManager.itemManager().items.get(i).getName(),new ImageIcon(icon), null);
+					button = new DalphinButton(assetManager.itemManager().items.get(i).getName(),new ImageIcon(icon), null, this);
 					
 				}else {
-					button = new DalphinButton(assetManager.itemManager().items.get(i).getName(),new ImageIcon(icon), editorTheme);	
+					button = new DalphinButton(assetManager.itemManager().items.get(i).getName(),new ImageIcon(icon), editorTheme, this);	
 					
 				}
 				button.setPreferredSize(new Dimension(100, 100));
@@ -78,5 +80,13 @@ public class ItemPane {
 		for(int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).setEditorTheme(editorTheme);
 		}
+	}
+	
+	public void setActiveButton(int button) {
+		this.activeButton = button;
+	}
+	
+	public DalphinButton getActiveButton() {
+		return this.buttons.get(activeButton);
 	}
 }

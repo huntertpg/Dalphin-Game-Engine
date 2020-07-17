@@ -3,15 +3,15 @@ package com.dalphin.engine.desktop.editor.menubar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.dalphin.engine.desktop.editor.childpane.MapEditorPane;
 import com.dalphin.engine.desktop.editor.dialog.NewWorldDialogBox;
+import com.dalphin.engine.desktop.editor.mapEditor.MapTabbedPane;
 
 
 public class NewWorldMenuItem implements ActionListener{
 	
-	private MapEditorPane mapEditor;
+	private MapTabbedPane mapEditor;
 	
-	public NewWorldMenuItem(MapEditorPane mapEditor) {
+	public NewWorldMenuItem(MapTabbedPane mapEditor) {
 		this.mapEditor = mapEditor;
 	}
 	

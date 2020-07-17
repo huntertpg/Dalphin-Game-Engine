@@ -2,6 +2,8 @@ package com.dalphin.engine.desktop.editor.childpane;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class BlockPane {
 	private EditorTheme editorTheme;
 	private ArrayList<DalphinButton> buttons = new ArrayList<DalphinButton>();
 	private String path;
+	private int activeButton;
 	/**
 	 * 
 	 * @param assetManager
@@ -35,39 +38,38 @@ public class BlockPane {
 		pane = new JPanel();
 		try {
 			for (int i = 0; i < assetManager.blockManager().blocks.size(); i++) {
-				if(assetManager.blockManager().getBlock(i).getTexture() == null) {
-					path = ((FileTextureData) assetManager.blockManager().getBlock(i).getTextureRegion().getTexture().getTextureData())
-							.getFileHandle().path();
+				if (assetManager.blockManager().getBlock(i).getTexture() == null) {
+					path = ((FileTextureData) assetManager.blockManager().getBlock(i).getTextureRegion().getTexture()
+							.getTextureData()).getFileHandle().path();
 					image = ImageIO.read(new File("../core/assets/" + path));
 					image = image.getSubimage(assetManager.blockManager().getBlock(i).getTextureRegion().getRegionX(),
 							assetManager.blockManager().getBlock(i).getTextureRegion().getRegionY(),
 							assetManager.blockManager().getBlock(i).getTextureRegion().getRegionWidth(),
 							assetManager.blockManager().getBlock(i).getTextureRegion().getRegionHeight());
-				}else {
+				} else {
 					path = ((FileTextureData) assetManager.blockManager().getBlock(i).getTexture().getTextureData())
 							.getFileHandle().path();
 					image = ImageIO.read(new File("../core/assets/" + path));
 				}
-				
+
 				icon = image.getScaledInstance(image.getWidth() * 2, image.getHeight() * 2, Image.SCALE_DEFAULT);
 				if (editorTheme == null) {
 					button = new DalphinButton(assetManager.blockManager().getBlock(i).getName(), new ImageIcon(icon),
-							null);
+							null, this);
 
 				} else {
 					button = new DalphinButton(assetManager.blockManager().getBlock(i).getName(), new ImageIcon(icon),
-							editorTheme);
+							editorTheme, this);
 
 				}
+				button.setButtonID(i);
 				button.setPreferredSize(new Dimension(100, 100));
 				button.setHorizontalTextPosition(JButton.CENTER);
 				button.setVerticalTextPosition(JButton.BOTTOM);
 				button.setToolTipText(assetManager.blockManager().getBlock(i).getName());
 				buttons.add(button);
 				pane.add(button);
-
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -98,5 +100,14 @@ public class BlockPane {
 
 	public AssetManager getAssetManager() {
 		return this.assetManager;
+	}
+	
+	public void setActiveButton(int button) {
+		this.activeButton = button;
+	}
+	
+	public DalphinButton getActiveButton() {
+		System.out.println(activeButton);
+		return this.buttons.get(activeButton);
 	}
 }

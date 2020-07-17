@@ -25,6 +25,7 @@ public class PreviewViewPort {
 	private JToolBar toolBar;
 	private DalphinButton pause;
 	private DalphinButton play;
+	private DalphinButton exit;
 	
 	public PreviewViewPort() {
 		config = new LwjglApplicationConfiguration();
@@ -55,19 +56,21 @@ public class PreviewViewPort {
 		panel = new JPanel();
 		pause = new DalphinButton("Pause");
 		play = new DalphinButton("Play");
+		exit = new DalphinButton("Exit");
 		toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.add(pause);
 		toolBar.add(play);
+		toolBar.add(exit);
 		panel.add(toolBar, BorderLayout.NORTH);
 		panel.add(canvas.getCanvas(), BorderLayout.SOUTH);
 		
 		
-		pause.addActionListener(new ActionListener() {
+		exit.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				panel.getParent().remove(panel);
 			}
 		});
 		
@@ -149,7 +152,6 @@ public class PreviewViewPort {
 	public void setGame(LibGDXTestGame game) {
 		this.game = game;
 		canvas.getCanvas().setSize(width, height);
-
 	}
 
 	/**
@@ -172,5 +174,6 @@ public class PreviewViewPort {
 	public void setCanvas(LwjglAWTCanvas canvas) {
 		this.canvas = canvas;
 	}
+	
 
 }

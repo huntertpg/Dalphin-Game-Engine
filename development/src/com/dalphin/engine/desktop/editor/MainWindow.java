@@ -12,19 +12,20 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.dalphin.engine.desktop.editor.childpane.MapPane;
 import com.dalphin.engine.desktop.editor.componentadapter.MainCA;
+import com.dalphin.engine.desktop.editor.mapEditor.MapAssetPane;
 import com.dalphin.engine.desktop.editor.menubar.WindowMenuBar;
 import com.dalphin.engine.desktop.editor.parentpane.AssetsTabbedPane;
 import com.dalphin.engine.desktop.editor.parentpane.GameTabbedPane;
 
 public class MainWindow {
-	
+
 	private JFrame frame;
 	private AssetsTabbedPane assetTabs;
 	private GameTabbedPane gameTabbedPane;
 	private WindowMenuBar menuBar;
 	private EditorTheme editorTheme;
 	boolean exited = false;
-	
+
 	/**
 	 * 
 	 */
@@ -34,21 +35,22 @@ public class MainWindow {
 		createJFrame();
 		gameTabbedPane = new GameTabbedPane();
 		assetTabs = new AssetsTabbedPane(frame, gameTabbedPane.getPreviewViewPort().getGame().assetManager);
-
 		finalizeJFrame();
 		assetTabs.createBlockPane(gameTabbedPane.getPreviewViewPort().getGame().assetManager);
 		assetTabs.createItemPane(gameTabbedPane.getPreviewViewPort().getGame().assetManager);
 		assetTabs.setEditorTheme(editorTheme);
 		editorTheme.setTheme(false);
 		menuBar.createNewWorldButton(gameTabbedPane.getMapEditorPane());
+		menuBar.previewGameButton(gameTabbedPane);
 		gameTabbedPane.getMapEditorPane().setBlockPane(assetTabs.getBlockPane());
 		gameTabbedPane.getMapEditorPane().setSize(frame.getWidth(), frame.getHeight());
 	}
+
 	/**
 	 * 
 	 */
 	public void createJFrame() {
-		
+
 		/**
 		 * 
 		 */
@@ -86,6 +88,7 @@ public class MainWindow {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 
 	 */
@@ -98,6 +101,7 @@ public class MainWindow {
 			System.out.println("Not started");
 		}
 		frame.add(assetTabs.getTabbedPane(), BorderLayout.WEST);
+		gameTabbedPane.getPane().removeTabAt(0);
 	}
 
 }

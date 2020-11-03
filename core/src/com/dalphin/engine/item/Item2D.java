@@ -147,7 +147,12 @@ public class Item2D {
 	 * @return texture
 	 */
 	public Texture getTexture() {
-		return texture;
+		if(texture != null) {
+			return texture;
+		}else {
+			return textureRegion.getTexture();
+		}
+		
 	}
 	/**
 	 * 
@@ -222,10 +227,10 @@ public class Item2D {
 	public void createBody(World world, BodyType bodyType) {
 		bodyDef = new BodyDef();
 		bodyDef.type = bodyType;
-		bodyDef.position.set(this.pos.x + (itemWidth / 2), this.pos.y + (itemHeight / 2));
+		bodyDef.position.set(this.pos.x + (itemWidth), this.pos.y + (itemHeight));
 		this.body = world.createBody(bodyDef);
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(itemWidth/2, itemHeight/2);
+		shape.setAsBox(itemWidth / 2, itemHeight / 2);
 		fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = density;
@@ -239,6 +244,10 @@ public class Item2D {
 	 */
 	public void canRotate(boolean rotate) {
 		this.rotateBlock = rotate;
+	}
+	
+	public TextureRegion getTextureRegion() {
+		return this.textureRegion;
 	}
 	
 }

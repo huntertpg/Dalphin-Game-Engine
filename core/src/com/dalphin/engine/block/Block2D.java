@@ -209,14 +209,13 @@ public class Block2D {
 				this.pos = new Vector2(body.getPosition().x - (blockWidth / 2),
 						body.getPosition().y - (blockHeight / 2));
 				if (rotateBlock) {
-					batch.draw(textureRegion, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1,
-							body.getTransform().getRotation());
+					batch.draw(texture, pos.x, pos.y, 1, 1, blockWidth, blockHeight, 1, 1);
 
 				} else {
-					batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+					batch.draw(texture, pos.x, pos.y, blockWidth, blockHeight);
 				}
 			} else {
-				batch.draw(textureRegion, pos.x, pos.y, blockWidth, blockHeight);
+				batch.draw(texture, pos.x, pos.y, blockWidth, blockHeight);
 			}
 		}
 
@@ -273,7 +272,8 @@ public class Block2D {
 	 * @return texture
 	 */
 	public Texture getTexture() {
-		return texture;
+			return texture;	
+		
 	}
 
 	/**
@@ -419,8 +419,13 @@ public class Block2D {
 	 * @return Block2D
 	 */
 	public Block2D createBlock() {
-		return new Block2D(this.getName(), this.blockID, this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(),
-				this.getDebug());
+		if(this.getTexture() == null) {
+			return new Block2D(this.getName(), this.getBlockID(), this.getTextureRegion(), this.getBlockWidth(), this.getBlockHeight(),
+					this.getDebug());	
+		}else {
+			return new Block2D(this.getName(), this.getBlockID(), this.getTexture(), this.getBlockWidth(), this.getBlockHeight(),
+					this.getDebug());
+		}
 	}
 
 	/**
@@ -451,5 +456,6 @@ public class Block2D {
 	public int getBlockID() {
 		return this.blockID;
 	}
+	
 
 }

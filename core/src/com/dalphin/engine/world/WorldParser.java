@@ -20,7 +20,7 @@ public class WorldParser {
 		this.worldDirectory = worldDirectory;
 		this.worldDef = worldDef;
 		
-		worldDef.getRayHandler().setAmbientLight(1f);
+		worldDef.getRayHandler().setAmbientLight(0.5f);
 		if(worldDef.getRayHandler() != null) {
 			//parseLightProfile();
 		}
@@ -67,7 +67,7 @@ public class WorldParser {
 		int index = 0;
 		for(int i = 0; i < blocks.length; i+=7) {
 			worldDef.getWorldBlocks().add(worldDef.getBlockManager()
-					.getBlock(Integer.parseInt(blocks[i])).createBlock());
+					.getBlock(blocks[i]).createBlock());
 			worldDef.getWorldBlocks().get(index).setPos(new Vector2(Float.parseFloat(blocks[i+1]), Float.parseFloat(blocks[i+2])));
 			if(blocks[i+3].equals("t") | blocks[i+3].equals("T")){
 				if(blocks[i+4].equals("D") | blocks[i+4].equals("d")) {

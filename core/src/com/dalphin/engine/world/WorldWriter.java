@@ -1,5 +1,6 @@
 package com.dalphin.engine.world;
 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -40,7 +41,7 @@ public class WorldWriter {
 		writer = new BufferedWriter(fileWriter);
 		for (int i = 0; i < worldDef.getWorldBlocks().size(); i++) {
 			try {
-				writer.write(worldDef.getWorldBlocks().get(i).getBlockID() + ":B ");
+				writer.write(worldDef.getWorldBlocks().get(i).getName() + ":B ");
 				writer.append(Float.toString(worldDef.getWorldBlocks().get(i).getxPos()) + ":X ");
 				writer.append(Float.toString(worldDef.getWorldBlocks().get(i).getyPos()) + ":Y ");
 				if (worldDef.getWorldBlocks().get(i).getBody() != null) {

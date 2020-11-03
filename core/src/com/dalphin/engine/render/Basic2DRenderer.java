@@ -17,6 +17,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dalphin.engine.debug.DebugUtil;
+import com.dalphin.engine.item.Item2D;
+import com.dalphin.engine.item.ItemAxe;
 import com.dalphin.engine.managers.AssetManager;
 import com.dalphin.engine.player.Player2D;
 import com.dalphin.engine.player.Player2DMovement;
@@ -25,8 +27,6 @@ import com.dalphin.engine.world.TestWorld;
 import com.dalphin.engine.world.WorldDef;
 import com.dalphin.engine.world.WorldParser;
 import com.dalphin.engine.world.WorldWriter;
-
-import box2dLight.RayHandler;
 
 public class Basic2DRenderer {
 
@@ -50,8 +50,6 @@ public class Basic2DRenderer {
 	public SpriteBatch batch;
 	private AssetManager assetManager;
 
-	// declare the texture manager(passed in by the main class)
-
 	// declare the random util for random numbers
 	private RandomUtil randomUtil;
 
@@ -61,7 +59,7 @@ public class Basic2DRenderer {
 	public Player2D player;
 	float elapsedTime = 0;
 	
-	TestWorld testWorld;
+	public TestWorld testWorld;
 	WorldParser worldParser;
 	
 	public WorldWriter writer;
@@ -95,7 +93,7 @@ public class Basic2DRenderer {
 		// set the viewport for the camera to the passed in values
 		this.viewPortWidth = viewPortWidth;
 		this.viewPortHeight = viewPortHeight;
-
+		
 
 	}
 
@@ -105,14 +103,13 @@ public class Basic2DRenderer {
 		// create the camera using the passed in viewport values
 		camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
 		batch.setProjectionMatrix(camera.combined);
-		//world = new WorldGen(assetManager.blockManager(), debugUtil);
-		//world.genorateWorld();
 		debugRender = new Box2DDebugRenderer(true, false, false, false, false, true);
 		testWorld = new TestWorld(assetManager.blockManager(), new Vector2(0, 0f));
 		testWorld.genWorld(debugUtil);
 		testWorld.setCamera(getCamera());
 		player.createBody(testWorld.getWorld(), BodyType.DynamicBody);
 		testWorld.getPlayers().add(player);
+		worldParser = new WorldParser(testWorld, "Test World");
 		worldParser = new WorldParser(testWorld, "Test Write");
 		worldParser.parseWorld();
 		writer = new WorldWriter("Test Write", testWorld);
@@ -131,16 +128,14 @@ public class Basic2DRenderer {
 	// rendering functions in other classes such as
 	// the world renderer to render things to the screen
 	public void render() {
-		batch.setProjectionMatrix(camera.combined);
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		camera.update();
 		batch.begin();
-		//world.drawWorld(batch, elapsedTime);
 		
 		playerMovement.update(Gdx.graphics.getDeltaTime());
 		player.draw(batch, elapsedTime);
 		testWorld.renderWorld(batch, elapsedTime);
-		debugRender.render(testWorld.getWorld(), camera.combined);
+		//debugRender.render(testWorld.getWorld(), camera.combined);
 		batch.end();
 	}
 }

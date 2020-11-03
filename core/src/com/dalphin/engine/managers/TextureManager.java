@@ -26,10 +26,11 @@ public class TextureManager {
 	private DebugUtil debugUtil;
 	
 	//declare texture loader for actually loading the textures
-	private TextureLoader textureLoader;
+	public TextureLoader textureLoader;
 	
 	//declare an ArrayList of textures for holding all the textures(Might be used for ID system later)
-	private ArrayList<Texture> textureList;
+	public  ArrayList<Texture> textureList;
+	public  ArrayList<TextureRegion[][]> textureRegionList;
 	
 	//Declare the texture brick
 	public Texture brick;
@@ -56,6 +57,7 @@ public class TextureManager {
 		
 		//Init the Texture ArrayList
 		textureList = new ArrayList<Texture>();
+		textureRegionList = new ArrayList<TextureRegion[][]>();
 		
 		//Init the Texture Loader
 		textureLoader = new TextureLoader(debugUtil);
@@ -69,25 +71,24 @@ public class TextureManager {
 	public void loadAllTextures() {
 		
 		//load the missing texture texture and add it to the texture arraylist
-		missingTexture = textureLoader.loadTexture("MissingTexture.png");
+		missingTexture = textureLoader.loadTexture("textures/MissingTexture.png");
 		textureList.add(missingTexture);
 		
 		
 		//load the brick texture and add it to the texture arraylist
-		brick = textureLoader.loadTexture("Brick.png");
+		brick = textureLoader.loadTexture("textures/Brick.png");
 		textureList.add(brick);
 		
 		//load the star texture (it's just a white block because I haven't gotten pixel editing to work
 		//lol) and add it to the texture arraylist
-		star = textureLoader.loadTexture("Star.png");
+		star = textureLoader.loadTexture("textures/Star.png");
 		textureList.add(star);
 		
-		playerSheet = new Texture("TestSheet.png");
+		playerSheet = new Texture("textures/TestSheet.png");
 		textureList.add(playerSheet);
 		
-		dungeonSpriteSheet = spriteLoader.loadSpriteSheet("DunTile.png", 8, 13, 16, 16);
-		
-		
+		dungeonSpriteSheet = spriteLoader.loadSpriteSheet("textures/DunTile.png", 8, 13, 16, 16);
+		textureRegionList.add(dungeonSpriteSheet);
 	}
 	
 	/**
